@@ -18,7 +18,7 @@ public class MainTest {
         ChromeOptions options = new ChromeOptions();
         options.setHeadless(true);
         //Скачивание нужного драйвера
-        //WebDriverManager.chromedriver().setup();
+        //вот так вот WebDriverManager.chromedriver().setup();
         //System.setProperty("webdriver.chrome.driver", "C:\\chromedriver\\chromedriver.exe");
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\Public\\Autotests\\chromedriver_win32\\chromedriver.exe");
         //Создаем новый объект chromedriver
