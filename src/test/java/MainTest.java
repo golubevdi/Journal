@@ -4,6 +4,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
 import org.junit.jupiter.api.DisplayName;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 @DisplayName("Тесты архивного журнала")
 @ExtendWith(ScreenshotExt.class)
@@ -14,12 +15,14 @@ public class MainTest {
 
     @BeforeEach
     public void start() {
+        ChromeOptions options = new ChromeOptions();
+        options.setHeadless(true);
         //Скачивание нужного драйвера
         //WebDriverManager.chromedriver().setup();
         //System.setProperty("webdriver.chrome.driver", "C:\\chromedriver\\chromedriver.exe");
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\Public\\Autotests\\chromedriver_win32\\chromedriver.exe");
         //Создаем новый объект chromedriver
-        driver.set(new ChromeDriver());
+        driver.set(new ChromeDriver(options));
         //Полноэкранный режим driver.manage().window().maximize();
     }
 
