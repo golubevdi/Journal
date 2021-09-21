@@ -16,7 +16,8 @@ public class MainTest {
     public void start() {
         //Скачивание нужного драйвера
         //WebDriverManager.chromedriver().setup();
-        System.setProperty("webdriver.chrome.driver", "C:\\chromedriver\\chromedriver.exe");
+        //System.setProperty("webdriver.chrome.driver", "C:\\chromedriver\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Public\\Autotests\\chromedriver_win32\\chromedriver.exe");
         //Создаем новый объект chromedriver
         driver.set(new ChromeDriver());
         //Полноэкранный режим driver.manage().window().maximize();
