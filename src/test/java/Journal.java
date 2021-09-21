@@ -17,7 +17,9 @@ public class Journal extends MainTest{
     public static final By textInput = By.id("79104");
     public static final By dischargeButton = By.id("84002");
     public static final By activateButton = By.id("78174");
-    public static final String filePath = "C:/Users/DGolubev/Downloads/journal.csv/";
+    //public static final String filePath = "C:/Users/DGolubev/Downloads/journal.csv/";
+    String home = System.getProperty("user.home");
+    File file = new File(home+"/Downloads/journal.csv");
 
     public Journal(WebDriver driver) {
 
@@ -162,7 +164,8 @@ public class Journal extends MainTest{
         String out ="";
 
         try {
-            br = new BufferedReader(new InputStreamReader(new FileInputStream(filePath), "Windows-1251"));
+            br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "Windows-1251"));
+            //br = new BufferedReader(new InputStreamReader(new FileInputStream(filePath), "Windows-1251"));
             String line;
             int count = 0;
             while ((line = br.readLine()) != null){
@@ -198,7 +201,7 @@ public class Journal extends MainTest{
         Assertions.assertEquals(comment_CSV,comment_input);
 
         //Удаление файла CSV
-        File file = new File(filePath);
+        //File file = new File(filePath);
         //file.delete();
         Assertions.assertTrue(file.delete());
     }
