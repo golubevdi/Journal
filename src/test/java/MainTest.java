@@ -9,6 +9,9 @@ import org.openqa.selenium.chrome.ChromeOptions;
 @DisplayName("Тесты архивного журнала")
 @ExtendWith(ScreenshotExt.class)
 public class MainTest {
+    final String color_act = "background-color: aqua;";
+    final String color_deact = "background-color: gold;";
+    final String color_ack = "background-color: crimson;";
 
 
     ThreadLocal<WebDriver> driver = new ThreadLocal<>();
@@ -22,10 +25,10 @@ public class MainTest {
         //System.setProperty("webdriver.chrome.driver", "C:\\chromedriver\\chromedriver.exe");
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\Public\\Autotests\\chromedriver_win32\\chromedriver.exe");
         //Создаем новый объект chromedriver
-        driver.set(new ChromeDriver(options));
+        driver.set(new ChromeDriver());
         //Полноэкранный режим driver.manage().window().maximize();
     }
-
+/*
     @Test
     @DisplayName("Проверка отображения пользовательского параметра тревоги в журнале (русские символы)")
     public void test1() throws InterruptedException {
@@ -35,6 +38,7 @@ public class MainTest {
         final String comment_input = "квитировано";
 
         journal.StartTest();
+
         journal.ActivateMessage(parameter_1_input);
         journal.AckedMessage(parameter_1_input, comment_input);
         journal.RefreshPage(parameter_1_input);
@@ -53,5 +57,13 @@ public class MainTest {
         journal.AckedMessage(parameter_1_input, comment_input);
         journal.RefreshPage(parameter_1_input);
         journal.fileCSV(parameter_1_input, comment_input);
+    }*/
+    @Test
+    public void test3() throws InterruptedException {
+
+
+        Journal journal = new Journal(driver.get());
+        journal.StartTest();
+        journal.color(color_act,color_deact,color_ack);
     }
 }
