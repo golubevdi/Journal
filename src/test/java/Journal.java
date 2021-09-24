@@ -55,6 +55,18 @@ public class Journal extends MainTest{
         //Ожидание совершения действия
         Thread.sleep(2000);
 
+        //Проверка нажата ли кнопка(если нажата, то отжать)
+        WebElement search_button_act1 = (WebElement)
+                jse.executeScript
+                        ("return document.querySelector(\"#\\\\37 8174\").shadowRoot.querySelector(\"div[class]\")");
+
+        String aClass1 = search_button_act1.getAttribute("class");
+        System.out.println(aClass1);
+        if (aClass1.equals("tbmain button active")){
+            driver.findElement(activateButton).click();
+        }
+        Thread.sleep(2000);
+
         //Поиск элемента "Текстовый ввод" и задание ему значения "-k"
         driver.findElement(textInput).sendKeys(parameter_1_input);
 
@@ -204,7 +216,7 @@ public class Journal extends MainTest{
         Assertions.assertEquals(comment_CSV,comment_input);
 
         //Удаление файла CSV
-        //File file = new File(filePath);
+        ///File file = new File(filePath);
         //file.delete();
         Assertions.assertTrue(file.delete());
     }
@@ -230,6 +242,19 @@ public class Journal extends MainTest{
             driver.findElement(activateButton2).click();
         }
         Thread.sleep(2000);
+
+        //Проверка нажата ли кнопка(если нажата, то отжать)
+        WebElement search_button_act2 = (WebElement)
+                jse.executeScript
+                        ("return document.querySelector(\"#\\\\39 8089\").shadowRoot.querySelector(\"div[class]\")");
+
+        String aClass2 = search_button_act2.getAttribute("class");
+        System.out.println(aClass2);
+        if (aClass.equals("tbmain button active")){
+            driver.findElement(activateButton2).click();
+        }
+        Thread.sleep(2000);
+
 
 
         driver.findElement(activateButton2).click();

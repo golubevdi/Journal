@@ -28,7 +28,7 @@ public class MainTest {
         driver.set(new ChromeDriver());
         //Полноэкранный режим driver.manage().window().maximize();
     }
-/*
+
     @Test
     @DisplayName("Проверка отображения пользовательского параметра тревоги в журнале (русские символы)")
     public void test1() throws InterruptedException {
@@ -57,7 +57,7 @@ public class MainTest {
         journal.AckedMessage(parameter_1_input, comment_input);
         journal.RefreshPage(parameter_1_input);
         journal.fileCSV(parameter_1_input, comment_input);
-    }*/
+    }
     @Test
     @DisplayName("Issue 21417: Свойство Состояние+Приоритет для журнала")
     public void test3() throws InterruptedException {
