@@ -218,19 +218,19 @@ public class Journal extends MainTest{
         //Ожидание (загрузка страницы, элементов)
         Thread.sleep(2000);
 
-        //WebElement search_button_act = (WebElement)
-        //        jse.executeScript
-        //                ("return document.querySelector(\"#\\\\39 4893\").shadowRoot.querySelector(\"div\").className");
-        //
-        //System.out.println(sss);
-        //driver.findElement(activateButton2).getClass();
-        //String sss = String.valueOf((Class<? extends WebElement>) jse.executeScript
-        //        ("return document.querySelector(\"#\\\\39 4893\").shadowRoot.querySelector(\"div\").className"));
-        //System.out.println("class=" +sss);
 
-        //WebElement search_button_act = (WebElement) jse.executeScript("return document.querySelector(\"#\\\\39 4893\").shadowRoot.querySelector(\"div\")");
-        //String aClass = String.valueOf(search_button_act.getClass());
-        //System.out.println(aClass);
+        //Проверка нажата ли кнопка(если нажата, то отжать)
+        WebElement search_button_act = (WebElement)
+               jse.executeScript
+                        ("return document.querySelector(\"#\\\\39 4893\").shadowRoot.querySelector(\"div[class]\")");
+
+        String aClass = search_button_act.getAttribute("class");
+        System.out.println(aClass);
+        if (aClass.equals("tbmain button active")){
+            driver.findElement(activateButton2).click();
+        }
+        Thread.sleep(2000);
+
 
         driver.findElement(activateButton2).click();
         Thread.sleep(2000);

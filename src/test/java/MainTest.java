@@ -59,6 +59,7 @@ public class MainTest {
         journal.fileCSV(parameter_1_input, comment_input);
     }*/
     @Test
+    @DisplayName("Issue 21417: Свойство Состояние+Приоритет для журнала")
     public void test3() throws InterruptedException {
 
 
