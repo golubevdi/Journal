@@ -180,7 +180,6 @@ public class Journal extends MainTest{
 
         try {
             br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "Windows-1251"));
-            //br = new BufferedReader(new InputStreamReader(new FileInputStream(filePath), "Windows-1251"));
             String line;
             int count = 0;
             while ((line = br.readLine()) != null){
@@ -200,7 +199,6 @@ public class Journal extends MainTest{
                 System.out.println("Error" + e);
             }
         }
-        //System.out.println(out);
 
         String[] subStr;
         String delimeter = ";"; // Разделитель
@@ -215,13 +213,15 @@ public class Journal extends MainTest{
         Assertions.assertEquals(parameter_CSV,parameter_1_input);
         Assertions.assertEquals(comment_CSV,comment_input);
 
+    }
+    @Step("Удаление csv файла")
+    public void deleteFile() {
         //Удаление файла CSV
-        ///File file = new File(filePath);
-        //file.delete();
         Assertions.assertTrue(file.delete());
     }
-    @Step("Issue 21417: Свойство Состояние+Приоритет для журнала")
-    public void color(String color_act, String color_deact, String color_ack)throws InterruptedException{
+
+    @Step("Активация, квитирование и деактивация сообщений")
+    public void preparation() throws InterruptedException {
         JavascriptExecutor jse = (JavascriptExecutor) driver;
         //Ожидание (загрузка страницы, элементов)
         Thread.sleep(2000);
@@ -230,46 +230,40 @@ public class Journal extends MainTest{
         //Ожидание (загрузка страницы, элементов)
         Thread.sleep(2000);
 
-
         //Проверка нажата ли кнопка(если нажата, то отжать)
         WebElement search_button_act = (WebElement)
-               jse.executeScript
+                jse.executeScript
                         ("return document.querySelector(\"#\\\\39 4893\").shadowRoot.querySelector(\"div[class]\")");
-
         String aClass = search_button_act.getAttribute("class");
         System.out.println(aClass);
-        if (aClass.equals("tbmain button active")){
+        if (aClass.equals("tbmain button active")) {
             driver.findElement(activateButton2).click();
         }
         Thread.sleep(2000);
-
         //Проверка нажата ли кнопка(если нажата, то отжать)
         WebElement search_button_act2 = (WebElement)
                 jse.executeScript
                         ("return document.querySelector(\"#\\\\39 8089\").shadowRoot.querySelector(\"div[class]\")");
-
         String aClass2 = search_button_act2.getAttribute("class");
         System.out.println(aClass2);
-        if (aClass.equals("tbmain button active")){
-            driver.findElement(activateButton2).click();
+        if (aClass.equals("tbmain button active")) {
+            driver.findElement(activateButton3).click();
         }
         Thread.sleep(2000);
-
-
-
+        //Активация Тревоги 1
         driver.findElement(activateButton2).click();
         Thread.sleep(2000);
-
+        //Поиск кнопки "квит" у Тревоги 1
         WebElement search_button_1 = (WebElement)
                 jse.executeScript
                         ("return document.querySelector(\"#\\\\39 4664\").shadowRoot.querySelectorAll(\".ack\")[0]");
-        //Клик по кнопке
+        //Клик по кнопке "квит"
         search_button_1.click();
         //Поиск кнопки подтверждения квитирования "ок"
         WebElement search_button_2 = (WebElement)
                 jse.executeScript
                         ("return document.querySelector(\"#\\\\39 4664\").shadowRoot.querySelector(\"#btnOk\")");
-        //Подтверждением квитирования "ок"
+        //Подтверждение квитирования "ок"
         search_button_2.click();
         Thread.sleep(2000);
         //Деактивация тревоги 1
@@ -282,27 +276,35 @@ public class Journal extends MainTest{
         driver.findElement(activateButton3).click();
         Thread.sleep(2000);
 
+    }
+    @Step("Проверка цветов")
+    public void compareColor(String color_act, String color_deact, String color_ack) throws InterruptedException{
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
+        //Поиск цвета у события "Появление" Тревоги 1
         WebElement color_message_active = (WebElement)
                 jse.executeScript
                         ("return document.querySelector(\"#\\\\39 4664\").shadowRoot.querySelector(' tr:nth-child(5)')");
         String col_activ = color_message_active.getAttribute("style");
         System.out.println("цвет события появление: "+col_activ);
-
+        //Ожидание
         Thread.sleep(2000);
+        //Поиск цвета у события "Исчезновение" Тревоги 1
         WebElement color_message_deactiv = (WebElement)
                 jse.executeScript
                         ("return document.querySelector(\"#\\\\39 4664\").shadowRoot.querySelector(' tr:nth-child(3)')");
         String col_deact = color_message_deactiv.getAttribute("style");
         System.out.println("цвет события исчезновение: "+col_deact);
+        //Поиск цвета у события "Квитирование" Тревоги 1
         WebElement color_message_acked = (WebElement)
                 jse.executeScript
                         ("return document.querySelector(\"#\\\\39 4664\").shadowRoot.querySelector(' tr:nth-child(4')");
         String col_acked = color_message_acked.getAttribute("style");
         System.out.println("цвет события квитирования: "+col_acked);
-        //Ожидание перед закрытием
+        //Сравнение цветов
         Assertions.assertEquals(color_act, col_activ);
         Assertions.assertEquals(color_deact, col_deact);
         Assertions.assertEquals(color_ack, col_acked);
+        //Ожидание перед закрытием
         Thread.sleep(10000);
     }
 }

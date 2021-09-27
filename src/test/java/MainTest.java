@@ -32,39 +32,42 @@ public class MainTest {
     @Test
     @DisplayName("Проверка отображения пользовательского параметра тревоги в журнале (русские символы)")
     public void test1() throws InterruptedException {
-        Journal journal = new Journal(driver.get());
         //Параметр для проверки
         final String parameter_1_input = "-квит_1";
         final String comment_input = "квитировано";
 
-        journal.StartTest();
+        Journal journal = new Journal(driver.get());
 
+        journal.StartTest();
         journal.ActivateMessage(parameter_1_input);
         journal.AckedMessage(parameter_1_input, comment_input);
         journal.RefreshPage(parameter_1_input);
         journal.fileCSV(parameter_1_input, comment_input);
+        journal.deleteFile();
     }
     @Test
     @DisplayName("Проверка отображения пользовательского параметра тревоги в журнале (английские символы)")
     public void test2() throws InterruptedException {
-        Journal journal = new Journal(driver.get());
         //Параметр для проверки
         final String parameter_1_input = "-ack_2";
         final String comment_input = "acked";
+
+        Journal journal = new Journal(driver.get());
 
         journal.StartTest();
         journal.ActivateMessage(parameter_1_input);
         journal.AckedMessage(parameter_1_input, comment_input);
         journal.RefreshPage(parameter_1_input);
         journal.fileCSV(parameter_1_input, comment_input);
+        journal.deleteFile();
     }
     @Test
     @DisplayName("Issue 21417: Свойство Состояние+Приоритет для журнала")
     public void test3() throws InterruptedException {
 
-
         Journal journal = new Journal(driver.get());
         journal.StartTest();
-        journal.color(color_act,color_deact,color_ack);
+        journal.preparation();
+        journal.compareColor(color_act,color_deact,color_ack);
     }
 }
