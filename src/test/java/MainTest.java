@@ -36,14 +36,14 @@ public class MainTest {
         final String parameter_1_input = "-квит_1";
         final String comment_input = "квитировано";
 
-        Journal journal = new Journal(driver.get());
+        archiveJournal1 aJournal1 = new archiveJournal1(driver.get());
 
-        journal.StartTest();
-        journal.ActivateMessage(parameter_1_input);
-        journal.AckedMessage(parameter_1_input, comment_input);
-        journal.RefreshPage(parameter_1_input);
-        journal.fileCSV(parameter_1_input, comment_input);
-        journal.deleteFile();
+        aJournal1.StartTest();
+        aJournal1.ActivateMessage(parameter_1_input);
+        aJournal1.AckedMessage(parameter_1_input, comment_input);
+        aJournal1.RefreshPage(parameter_1_input);
+        aJournal1.fileCSV(parameter_1_input, comment_input);
+        aJournal1.deleteFile();
     }
     @Test
     @DisplayName("Проверка отображения пользовательского параметра тревоги в журнале (английские символы)")
@@ -52,22 +52,22 @@ public class MainTest {
         final String parameter_1_input = "-ack_2";
         final String comment_input = "acked";
 
-        Journal journal = new Journal(driver.get());
+        archiveJournal1 aJournal1 = new archiveJournal1(driver.get());
 
-        journal.StartTest();
-        journal.ActivateMessage(parameter_1_input);
-        journal.AckedMessage(parameter_1_input, comment_input);
-        journal.RefreshPage(parameter_1_input);
-        journal.fileCSV(parameter_1_input, comment_input);
-        journal.deleteFile();
+        aJournal1.StartTest();
+        aJournal1.ActivateMessage(parameter_1_input);
+        aJournal1.AckedMessage(parameter_1_input, comment_input);
+        aJournal1.RefreshPage(parameter_1_input);
+        aJournal1.fileCSV(parameter_1_input, comment_input);
+        aJournal1.deleteFile();
     }
     @Test
     @DisplayName("Issue 21417: Свойство Состояние+Приоритет для журнала")
     public void test3() throws InterruptedException {
 
-        Journal journal = new Journal(driver.get());
-        journal.StartTest();
-        journal.preparation();
-        journal.compareColor(color_act,color_deact,color_ack);
+        archiveJournal2 aJournal2 = new archiveJournal2(driver.get());
+        aJournal2.StartTest();
+        aJournal2.preparation();
+        aJournal2.compareColor(color_act,color_deact,color_ack);
     }
 }
