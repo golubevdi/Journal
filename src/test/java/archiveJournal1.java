@@ -14,12 +14,9 @@ public class archiveJournal1 extends MainTest{
 
     public WebDriver driver;
     public static final By test1Button = By.id("81112");
-    public static final By test2Button = By.id("95231");
     public static final By textInput = By.id("79104");
     public static final By dischargeButton = By.id("84002");
     public static final By activateButton = By.id("78174");
-    public static final By activateButton2 = By.id("94893");
-    public static final By activateButton3 = By.id("98089");
     //public static final String filePath = "C:/Users/DGolubev/Downloads/journal.csv/";
     String home = System.getProperty("user.home");
     File file = new File(home+"/Downloads/journal.csv");

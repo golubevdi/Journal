@@ -28,7 +28,7 @@ public class archiveJournal2 extends MainTest{
         JavascriptExecutor jse = (JavascriptExecutor) driver;
         //Ожидание (загрузка страницы, элементов)
         Thread.sleep(2000);
-        //Поиск кнопки с переходом на окно теста 1WebElement search_button_1 = (WebElement)
+        //Поиск кнопки с переходом на окно теста 2
         driver.findElement(test2Button).click();
         //Ожидание (загрузка страницы, элементов)
         Thread.sleep(2000);
