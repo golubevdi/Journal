@@ -17,23 +17,23 @@ public class archiveJournal2 extends MainTest{
         this.driver = driver;
     }
 
-    @Step("Начало. Переход на страницу для теста")
+    @Step("РќР°С‡Р°Р»Рѕ. РџРµСЂРµС…РѕРґ РЅР° СЃС‚СЂР°РЅРёС†Сѓ РґР»СЏ С‚РµСЃС‚Р°")
     public void StartTest(){
-        System.out.println("шаг 1 запуск браузера");
+        System.out.println("С€Р°Рі 1 Р·Р°РїСѓСЃРє Р±СЂР°СѓР·РµСЂР°");
         String Base_URL = "http://127.0.0.1:8043";
         this.driver.get(Base_URL);
     }
-    @Step("Активация, квитирование и деактивация сообщений")
+    @Step("РђРєС‚РёРІР°С†РёСЏ, РєРІРёС‚РёСЂРѕРІР°РЅРёРµ Рё РґРµР°РєС‚РёРІР°С†РёСЏ СЃРѕРѕР±С‰РµРЅРёР№")
     public void preparation() throws InterruptedException {
         JavascriptExecutor jse = (JavascriptExecutor) driver;
-        //Ожидание (загрузка страницы, элементов)
+        //РћР¶РёРґР°РЅРёРµ (Р·Р°РіСЂСѓР·РєР° СЃС‚СЂР°РЅРёС†С‹, СЌР»РµРјРµРЅС‚РѕРІ)
         Thread.sleep(2000);
-        //Поиск кнопки с переходом на окно теста 2
+        //РџРѕРёСЃРє РєРЅРѕРїРєРё СЃ РїРµСЂРµС…РѕРґРѕРј РЅР° РѕРєРЅРѕ С‚РµСЃС‚Р° 2
         driver.findElement(test2Button).click();
-        //Ожидание (загрузка страницы, элементов)
+        //РћР¶РёРґР°РЅРёРµ (Р·Р°РіСЂСѓР·РєР° СЃС‚СЂР°РЅРёС†С‹, СЌР»РµРјРµРЅС‚РѕРІ)
         Thread.sleep(2000);
 
-        //Проверка нажата ли кнопка(если нажата, то отжать)
+        //РџСЂРѕРІРµСЂРєР° РЅР°Р¶Р°С‚Р° Р»Рё РєРЅРѕРїРєР°(РµСЃР»Рё РЅР°Р¶Р°С‚Р°, С‚Рѕ РѕС‚Р¶Р°С‚СЊ)
         WebElement search_button_act = (WebElement)
                 jse.executeScript
                         ("return document.querySelector(\"#\\\\39 4893\").shadowRoot.querySelector(\"div[class]\")");
@@ -43,7 +43,7 @@ public class archiveJournal2 extends MainTest{
             driver.findElement(activateButton2).click();
         }
         Thread.sleep(2000);
-        //Проверка нажата ли кнопка(если нажата, то отжать)
+        //РџСЂРѕРІРµСЂРєР° РЅР°Р¶Р°С‚Р° Р»Рё РєРЅРѕРїРєР°(РµСЃР»Рё РЅР°Р¶Р°С‚Р°, С‚Рѕ РѕС‚Р¶Р°С‚СЊ)
         WebElement search_button_act2 = (WebElement)
                 jse.executeScript
                         ("return document.querySelector(\"#\\\\39 8089\").shadowRoot.querySelector(\"div[class]\")");
@@ -53,61 +53,61 @@ public class archiveJournal2 extends MainTest{
             driver.findElement(activateButton3).click();
         }
         Thread.sleep(2000);
-        //Активация Тревоги 1
+        //РђРєС‚РёРІР°С†РёСЏ РўСЂРµРІРѕРіРё 1
         driver.findElement(activateButton2).click();
         Thread.sleep(2000);
-        //Поиск кнопки "квит" у Тревоги 1
+        //РџРѕРёСЃРє РєРЅРѕРїРєРё "РєРІРёС‚" Сѓ РўСЂРµРІРѕРіРё 1
         WebElement search_button_1 = (WebElement)
                 jse.executeScript
                         ("return document.querySelector(\"#\\\\39 4664\").shadowRoot.querySelectorAll(\".ack\")[0]");
-        //Клик по кнопке "квит"
+        //РљР»РёРє РїРѕ РєРЅРѕРїРєРµ "РєРІРёС‚"
         search_button_1.click();
-        //Поиск кнопки подтверждения квитирования "ок"
+        //РџРѕРёСЃРє РєРЅРѕРїРєРё РїРѕРґС‚РІРµСЂР¶РґРµРЅРёСЏ РєРІРёС‚РёСЂРѕРІР°РЅРёСЏ "РѕРє"
         WebElement search_button_2 = (WebElement)
                 jse.executeScript
                         ("return document.querySelector(\"#\\\\39 4664\").shadowRoot.querySelector(\"#btnOk\")");
-        //Подтверждение квитирования "ок"
+        //РџРѕРґС‚РІРµСЂР¶РґРµРЅРёРµ РєРІРёС‚РёСЂРѕРІР°РЅРёСЏ "РѕРє"
         search_button_2.click();
         Thread.sleep(2000);
-        //Деактивация тревоги 1
+        //Р”РµР°РєС‚РёРІР°С†РёСЏ С‚СЂРµРІРѕРіРё 1
         driver.findElement(activateButton2).click();
         Thread.sleep(2000);
-        //Активация тревоги 2
+        //РђРєС‚РёРІР°С†РёСЏ С‚СЂРµРІРѕРіРё 2
         driver.findElement(activateButton3).click();
         Thread.sleep(2000);
-        //Деактивация тревоги 2
+        //Р”РµР°РєС‚РёРІР°С†РёСЏ С‚СЂРµРІРѕРіРё 2
         driver.findElement(activateButton3).click();
         Thread.sleep(2000);
 
     }
-    @Step("Проверка цветов")
+    @Step("РџСЂРѕРІРµСЂРєР° С†РІРµС‚РѕРІ")
     public void compareColor(String color_act, String color_deact, String color_ack) throws InterruptedException{
         JavascriptExecutor jse = (JavascriptExecutor) driver;
-        //Поиск цвета у события "Появление" Тревоги 1
+        //РџРѕРёСЃРє С†РІРµС‚Р° Сѓ СЃРѕР±С‹С‚РёСЏ "РџРѕСЏРІР»РµРЅРёРµ" РўСЂРµРІРѕРіРё 1
         WebElement color_message_active = (WebElement)
                 jse.executeScript
                         ("return document.querySelector(\"#\\\\39 4664\").shadowRoot.querySelector(' tr:nth-child(5)')");
         String col_activ = color_message_active.getAttribute("style");
-        System.out.println("цвет события появление: "+col_activ);
-        //Ожидание
+        System.out.println("С†РІРµС‚ СЃРѕР±С‹С‚РёСЏ РїРѕСЏРІР»РµРЅРёРµ: "+col_activ);
+        //РћР¶РёРґР°РЅРёРµ
         Thread.sleep(2000);
-        //Поиск цвета у события "Исчезновение" Тревоги 1
+        //РџРѕРёСЃРє С†РІРµС‚Р° Сѓ СЃРѕР±С‹С‚РёСЏ "РСЃС‡РµР·РЅРѕРІРµРЅРёРµ" РўСЂРµРІРѕРіРё 1
         WebElement color_message_deactiv = (WebElement)
                 jse.executeScript
                         ("return document.querySelector(\"#\\\\39 4664\").shadowRoot.querySelector(' tr:nth-child(3)')");
         String col_deact = color_message_deactiv.getAttribute("style");
-        System.out.println("цвет события исчезновение: "+col_deact);
-        //Поиск цвета у события "Квитирование" Тревоги 1
+        System.out.println("С†РІРµС‚ СЃРѕР±С‹С‚РёСЏ РёСЃС‡РµР·РЅРѕРІРµРЅРёРµ: "+col_deact);
+        //РџРѕРёСЃРє С†РІРµС‚Р° Сѓ СЃРѕР±С‹С‚РёСЏ "РљРІРёС‚РёСЂРѕРІР°РЅРёРµ" РўСЂРµРІРѕРіРё 1
         WebElement color_message_acked = (WebElement)
                 jse.executeScript
                         ("return document.querySelector(\"#\\\\39 4664\").shadowRoot.querySelector(' tr:nth-child(4')");
         String col_acked = color_message_acked.getAttribute("style");
-        System.out.println("цвет события квитирования: "+col_acked);
-        //Сравнение цветов
+        System.out.println("С†РІРµС‚ СЃРѕР±С‹С‚РёСЏ РєРІРёС‚РёСЂРѕРІР°РЅРёСЏ: "+col_acked);
+        //РЎСЂР°РІРЅРµРЅРёРµ С†РІРµС‚РѕРІ
         Assertions.assertEquals(color_act, col_activ);
         Assertions.assertEquals(color_deact, col_deact);
         Assertions.assertEquals(color_ack, col_acked);
-        //Ожидание перед закрытием
+        //РћР¶РёРґР°РЅРёРµ РїРµСЂРµРґ Р·Р°РєСЂС‹С‚РёРµРј
         Thread.sleep(10000);
     }
 }

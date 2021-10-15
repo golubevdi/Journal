@@ -86,5 +86,8 @@ public class MainTest {
 
         aJournal3.StartTest();
         aJournal3.preparation1(message_1_input,comment_1_input,message_2_input,comment_2_input);
+        aJournal3.acked();
+        aJournal3.on();
+        aJournal3.off();
     }
 }
