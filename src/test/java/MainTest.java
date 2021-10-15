@@ -27,6 +27,13 @@ public class MainTest {
     final String comment_1_input = "комментарий";
     final String message_2_input = "message";
     final String comment_2_input = "comment";
+    final String full_name_object_1 = "Объекты.Test 3.Объект 1";
+    final String name_object_1 = "Объект 1";
+    final String source_1 = "Тревога 1";
+    final String full_name_object_2 = "Объекты.Test 3.Объект 1";
+    final String name_object_2 = "Объект 1";
+    final String source_2 = "Тревога 1";
+
 
     ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
@@ -78,6 +85,7 @@ public class MainTest {
         aJournal2.preparation();
         aJournal2.compareColor(color_act,color_deact,color_ack);
     }*/
+
     @Test
     @DisplayName("Что-то там")
     public void test4() throws InterruptedException {
@@ -85,9 +93,21 @@ public class MainTest {
         archiveJournal3 aJournal3 = new archiveJournal3(driver.get());
 
         aJournal3.StartTest();
-        aJournal3.preparation1(message_1_input,comment_1_input,message_2_input,comment_2_input);
-        aJournal3.acked();
-        aJournal3.on();
-        aJournal3.off();
-    }
+        aJournal3.alarm1(message_1_input, comment_1_input);
+        aJournal3.acked(message_1_input, comment_1_input, full_name_object_1, name_object_1, source_1);
+        aJournal3.on(message_1_input, comment_1_input, full_name_object_1, name_object_1, source_1);
+        aJournal3.off(message_1_input, comment_1_input, full_name_object_1, name_object_1, source_1);
+
+    }/*
+    @Test
+    @DisplayName("Что-то там еще")
+    public void test5() throws InterruptedException {
+        archiveJournal3 aJournal3 = new archiveJournal3(driver.get());
+
+        aJournal3.StartTest();
+        aJournal3.alarm2(message_2_input,comment_2_input);
+        aJournal3.acked(message_2_input,comment_2_input,full_name_object_2,name_object_2,source_2);
+        aJournal3.on(message_2_input,comment_2_input,full_name_object_2,name_object_2,source_2);
+        aJournal3.off(message_2_input,comment_2_input,full_name_object_2,name_object_2,source_2);
+    }*/
 }

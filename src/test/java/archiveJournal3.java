@@ -23,11 +23,12 @@ public class archiveJournal3 extends MainTest{
     @Step("Начало. Переход на страницу для теста")
     public void StartTest(){
         System.out.println("шаг 1 запуск браузера");
+        System.out.println("-------------------------------------------------------");
         String Base_URL = "http://127.0.0.1:8043";
         this.driver.get(Base_URL);
     }
     @Step("Активация, квитирование и деактивация Тревоги 1 и Тревоги 2")
-    public void preparation1(String message_1_input, String comment_1_input, String message_2_input, String comment_2_input) throws InterruptedException {
+    public void alarm1(String message_1_input, String comment_1_input) throws InterruptedException {
         JavascriptExecutor jse = (JavascriptExecutor) driver;
         //Ожидание (загрузка страницы, элементов)
         Thread.sleep(2000);
@@ -42,20 +43,12 @@ public class archiveJournal3 extends MainTest{
                         ("return document.querySelector(\"#\\\\31 03114\").shadowRoot.querySelector(\"div[class]\")");
         String aClass1 = search_button_act1.getAttribute("class");
         System.out.println("Состояние кнопки Активность Тревоги 1 до начала теста: " + aClass1);
+        System.out.println("-------------------------------------------------------");
+
         if (aClass1.equals("tbmain button active")) {
             driver.findElement(activateButton1).click();
         }
         Thread.sleep(2000);
-
-        //Проверка нажата ли кнопка(если нажата, то отжать), для Тревоги 2
-        WebElement search_button_act2 = (WebElement)
-                jse.executeScript
-                        ("return document.querySelector(\"#\\\\31 03575\").shadowRoot.querySelector(\"div[class]\")");
-        String aClass2 = search_button_act2.getAttribute("class");
-        System.out.println("Состояние кнопки Активность Тревоги 2 до начала теста: " + aClass2);
-        if (aClass2.equals("tbmain button active")) {
-            driver.findElement(activateButton2).click();
-        }
 
         //Увеличиваем значение инкремента Тревоги 1
         WebElement search_button_inc_up = (WebElement)
@@ -64,32 +57,12 @@ public class archiveJournal3 extends MainTest{
         search_button_inc_up.click();
         Thread.sleep(2000);
 
-        //Поиск значения инкремента 2 (через текст)
-        WebElement text_inc_2 = (WebElement)
-                jse.executeScript
-                        ("return document.querySelector(\"#\\\\31 08031\").shadowRoot.querySelector(\"div\")");
-        String incText2 = text_inc_2.getText();
-
-
-        //вывод значения инкремента Тревоги 2 в консоль
-        System.out.println("приоритет тревоги 2: " + incText2);
-        Thread.sleep(2000);
-        //Увеличиваем значение инкремента Тревоги 2
-        WebElement search_button_inc_up_2 = (WebElement)
-                jse.executeScript
-                        ("return document.querySelector(\"#\\\\31 04066\").shadowRoot.querySelector(\"#incr\")");
-        search_button_inc_up_2.click();
-        search_button_inc_up_2.click();
-        Thread.sleep(2000);
 
         //Поиск элемента для задания сообщения Тревоги 1 и задание ему значения "сообщение"
         driver.findElement(textMessage1).sendKeys(message_1_input);
         //Поиск элемента для задания комментария Тревоги 1 и задание ему значения "комментарий"
         driver.findElement(textComment1).sendKeys(comment_1_input);
-        //Поиск элемента для задания сообщения Тревоги 1 и задание ему значения "сообщение"
-        driver.findElement(textMessage2).sendKeys(message_2_input);
-        //Поиск элемента для задания комментария Тревоги 1 и задание ему значения "комментарий"
-        driver.findElement(textComment2).sendKeys(comment_2_input);
+
 
         //Поиск кнопки "Активность" Тревоги 1 и клик по ней (кнопка с фиксацией, положение вкл.)
         driver.findElement(activateButton1).click();
@@ -103,10 +76,13 @@ public class archiveJournal3 extends MainTest{
         Thread.sleep(2000);
         //Поиск кнопки "Активность" Тревоги 1 и клик по ней (кнопка с фиксацией, положение выкл.)
         driver.findElement(activateButton1).click();
+        Thread.sleep(2000);
     }
-    @Step("Проверка столбцов журнала у события квитирование")
-    public void acked() throws InterruptedException{
+    @Step("Проверка столбцов журнала у события квитирование Тревоги 1")
+    public void acked(String message_1_input, String comment_1_input,
+                      String full_name_object, String name_object, String source) throws InterruptedException{
         JavascriptExecutor jse = (JavascriptExecutor) driver;
+        Thread.sleep(2000);
         //Поиск значения приоритет (событие квитирование)
         WebElement priority_acked_1 = (WebElement)
                 jse.executeScript
@@ -163,25 +139,39 @@ public class archiveJournal3 extends MainTest{
         String inc1 = text_inc.getText();
 
         //Вывод параметров в консоль
-        System.out.println("ДЛЯ ТРЕВОГИ 1: " + "Приоритет : " + priorityAckedText1);
-        System.out.println("Событие: "
-                + ackedText1 + "; Сообщение: " + messageAckText1);
-        System.out.println("; Комментарий: " + commentAckText1 + "; Полное имя объекта: "
-                + fullNameObjectAckText1 + "; Объект: " + nameObjectAckText1 + "Источник: " + sourceAckText1);
+        System.out.println("ДЛЯ ТРЕВОГИ 1: ");
+        System.out.println("Приоритет : " + priorityAckedText1);
+        System.out.println("Событие: " + ackedText1);
+        System.out.println("Сообщение: " + messageAckText1);
+        System.out.println("Комментарий: " + commentAckText1);
+        System.out.println("Полное имя объекта: " + fullNameObjectAckText1);
+        System.out.println("Объект: " + nameObjectAckText1);
+        System.out.println("Источник: " + sourceAckText1);
+        System.out.println("-------------------------------------------------------");
 
         //Проверки
+        Assertions.assertEquals("Квитирование",ackedText1);
         Assertions.assertEquals(inc1, priorityAckedText1);
-        Thread.sleep(10000);
+        //Assertions.assertEquals(message_1_input, messageAckText1); //есть ошибка
+        //Assertions.assertEquals(comment_1_input, commentAckText1); //есть ошибка
+        Assertions.assertEquals(full_name_object,fullNameObjectAckText1);
+        Assertions.assertEquals(name_object,nameObjectAckText1);
+        Assertions.assertEquals(source,sourceAckText1);
+
+        //Ожидание
+        Thread.sleep(5000);
     }
-    @Step("Проверка столбцов журнала у события появление")
-    public void on() {
+
+    @Step("Проверка столбцов журнала у события появление  Тревоги 1")
+    public void on(String message_1_input, String comment_1_input,
+                   String full_name_object, String name_object, String source) throws InterruptedException {
         JavascriptExecutor jse = (JavascriptExecutor) driver;
         //Поиск у сообщения (событие появление) поля Событие
         WebElement event_on1 = (WebElement)
                 jse.executeScript
                         ("return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"tr:nth-child(3) > td:nth-child(4)\")");
         //Из поля в параметр String
-        String OnText1 = event_on1.getText();
+        String onText1 = event_on1.getText();
 
         //Поиск у сообщения (событие появление) поля Сообщение
         WebElement message_on_1 = (WebElement)
@@ -218,19 +208,177 @@ public class archiveJournal3 extends MainTest{
         //Из поля в параметр String
         String sourceOnText1 = source_on_1.getText();
 
+        //Поиск значения приоритет (событие квитирование)
+        WebElement priority_on_1 = (WebElement)
+                jse.executeScript
+                        ("return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"tr:nth-child(3) > td:nth-child(5)\")");
+        //Из поля в параметр String
+        String priorityOnText1 = priority_on_1.getText();
 
         //Вывод в консоль
-        System.out.println("Событие: "
-                + OnText1 + "; Сообщение: " + messageOnText1);
-        System.out.println("; Комментарий: " + commentOnText1 + "; Полное имя объекта: "
-                + fullNameObjectOnText1 + "; Объект: " + nameObjectOnText1 + "Источник: " + sourceOnText1);
+        System.out.println("Приоритет: " + priorityOnText1);
+        System.out.println("Событие: " + onText1);
+        System.out.println("Сообщение: " + messageOnText1);
+        System.out.println("Комментарий: " + commentOnText1);
+        System.out.println("Полное имя объекта: " + fullNameObjectOnText1);
+        System.out.println("Объект: " + nameObjectOnText1);
+        System.out.println("Источник: " + sourceOnText1);
+        System.out.println("-------------------------------------------------------");
 
-        //Поиск кнопки "Активность" Тревоги 2 и клик по ней (кнопка с фиксацией, положение вкл.)
-        //driver.findElement(activateButton2).click();
+        //Поиск значения инкремента 1 (через текст)
+        WebElement text_inc = (WebElement)
+                jse.executeScript
+                        ("return document.querySelector(\"#\\\\31 08016\").shadowRoot.querySelector(\"div\")");
+        String inc1 = text_inc.getText();
+
+
+
+        //Проверки
+        Assertions.assertEquals("Появление",onText1);
+        Assertions.assertEquals(inc1, priorityOnText1);
+        //Assertions.assertEquals(message_1_input, messageOnText1); //есть ошибка
+        //Assertions.assertEquals(comment_1_input, commentOnText1); //есть ошибка
+        Assertions.assertEquals(full_name_object,fullNameObjectOnText1);
+        Assertions.assertEquals(name_object,nameObjectOnText1);
+        Assertions.assertEquals(source,sourceOnText1);
+
+        //Ожидание
+        Thread.sleep(5000);
     }
-    @Step("Проверка столбцов журнала у события исчезновение")
-    public void off() throws InterruptedException {
-        Thread.sleep(7000);
+
+    @Step("Проверка столбцов журнала у события исчезновение  Тревоги 1")
+    public void off(String message_1_input, String comment_1_input,
+                    String full_name_object, String name_object, String source) throws InterruptedException {
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
+        //Поиск значения приоритет (событие квитирование)
+        WebElement priority_off_1 = (WebElement)
+                jse.executeScript
+                        ("return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"tr:nth-child(1) > td:nth-child(5)\")");
+        //Из поля в параметр String
+        String priorityOffText1 = priority_off_1.getText();
+
+        //Поиск у сообщения (событие исчезновение) поля Событие
+        WebElement event_off1 = (WebElement)
+                jse.executeScript
+                        ("return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"tr:nth-child(1) > td:nth-child(4)\")");
+        //Из поля в параметр String
+        String offText1 = event_off1.getText();
+
+        //Поиск у сообщения (событие появление) поля Сообщение
+        WebElement message_off_1 = (WebElement)
+                jse.executeScript
+                        ("return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"tr:nth-child(1) > td:nth-child(7)\")");
+        //Из поля в параметр String
+        String messageOffText1 = message_off_1.getText();
+
+        //Поиск у сообщения (событие появление) поля Комментарий
+        WebElement comment_off_1 = (WebElement)
+                jse.executeScript
+                        ("return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"tr:nth-child(1) > td:nth-child(8)\")");
+        //Из поля в параметр String
+        String commentOffText1 = comment_off_1.getText();
+
+        //Поиск у сообщения (событие появление) поля Полное имя
+        WebElement fullName_object_off_1 = (WebElement)
+                jse.executeScript
+                        ("return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"tr:nth-child(1) > td:nth-child(9)\")");
+        //Из поля в параметр String
+        String fullNameObjectOffText1 = fullName_object_off_1.getText();
+
+        //Поиск у сообщения (событие появление) поля Имя объекта
+        WebElement name_object_off_1 = (WebElement)
+                jse.executeScript
+                        ("return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"tr:nth-child(1) > td:nth-child(10)\")");
+        //Из поля в параметр String
+        String nameObjectOffText1 = name_object_off_1.getText();
+
+        //Поиск у сообщения (событие появление) поля Источник
+        WebElement source_off_1 = (WebElement)
+                jse.executeScript
+                        ("return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"tr:nth-child(1) > td:nth-child(11)\")");
+        //Из поля в параметр String
+        String sourceOffText1 = source_off_1.getText();
+
+
+        //Вывод в консоль
+        System.out.println("Приоритет : " + priorityOffText1);
+        System.out.println("Событие: " + offText1);
+        System.out.println("Сообщение: " + messageOffText1);
+        System.out.println("Комментарий: " + commentOffText1);
+        System.out.println("Полное имя объекта: " + fullNameObjectOffText1);
+        System.out.println("Объект: " + nameObjectOffText1);
+        System.out.println("Источник: " + sourceOffText1);
+        System.out.println("-------------------------------------------------------");
+
+        //Поиск значения инкремента 1 (через текст)
+        WebElement text_inc = (WebElement)
+                jse.executeScript
+                        ("return document.querySelector(\"#\\\\31 08016\").shadowRoot.querySelector(\"div\")");
+        String inc1 = text_inc.getText();
+
+        //Проверки
+        Assertions.assertEquals("Исчезновение",offText1);
+        Assertions.assertEquals(inc1, priorityOffText1);
+        //Assertions.assertEquals(message_1_input, messageOffText1); //есть ошибка
+        //Assertions.assertEquals(comment_1_input, commentOffText1); //есть ошибка
+        Assertions.assertEquals(full_name_object,fullNameObjectOffText1);
+        Assertions.assertEquals(name_object,nameObjectOffText1);
+        Assertions.assertEquals(source,sourceOffText1);
+
+        //Ожидание
+        Thread.sleep(5000);
+    }
+
+    @Step("Активация, квитирование и деактивация Тревоги 2")
+    public void alarm2(String message_2_input, String comment_2_input) throws InterruptedException {
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
+        //Проверка нажата ли кнопка(если нажата, то отжать), для Тревоги 2
+        WebElement search_button_act2 = (WebElement)
+                jse.executeScript
+                        ("return document.querySelector(\"#\\\\31 03575\").shadowRoot.querySelector(\"div[class]\")");
+        String aClass2 = search_button_act2.getAttribute("class");
+
+        System.out.println("Состояние кнопки Активность Тревоги 2 до начала теста: " + aClass2);
+        System.out.println("-------------------------------------------------------");
+
+        if (aClass2.equals("tbmain button active")) {
+            driver.findElement(activateButton2).click();
+        }
+        //Поиск значения инкремента 2 (через текст)
+        WebElement text_inc_2 = (WebElement)
+                jse.executeScript
+                        ("return document.querySelector(\"#\\\\31 08031\").shadowRoot.querySelector(\"div\")");
+        String incText2 = text_inc_2.getText();
+
+        //Поиск элемента для задания сообщения Тревоги 2 и задание ему значения "сообщение"
+        driver.findElement(textMessage2).sendKeys(message_2_input);
+        //Поиск элемента для задания комментария Тревоги 2 и задание ему значения "комментарий"
+        driver.findElement(textComment2).sendKeys(comment_2_input);
+
+        //вывод значения инкремента Тревоги 2 в консоль
+        System.out.println("приоритет тревоги 2: " + incText2);
+        Thread.sleep(2000);
+        //Увеличиваем значение инкремента Тревоги 2
+        WebElement search_button_inc_up_2 = (WebElement)
+                jse.executeScript
+                        ("return document.querySelector(\"#\\\\31 04066\").shadowRoot.querySelector(\"#incr\")");
+        search_button_inc_up_2.click();
+        search_button_inc_up_2.click();
+        Thread.sleep(2000);
+
+        //Поиск кнопки "Активность" Тревоги 1 и клик по ней (кнопка с фиксацией, положение вкл.)
+        driver.findElement(activateButton2).click();
+        Thread.sleep(2000);
+        //Поиск кнопки "квит" у последнего появившегося сообщения в архивном журнале
+        WebElement search_button2 = (WebElement)
+                jse.executeScript
+                        ("return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelectorAll(\".ack\")[0]");
+        //Клик по кнопке
+        search_button2.click();
+        Thread.sleep(2000);
+        //Поиск кнопки "Активность" Тревоги 1 и клик по ней (кнопка с фиксацией, положение выкл.)
+        driver.findElement(activateButton2).click();
+        Thread.sleep(10000);
     }
 }
 
