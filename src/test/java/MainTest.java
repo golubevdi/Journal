@@ -30,9 +30,9 @@ public class MainTest {
     final String full_name_object_1 = "Объекты.Test 3.Объект 1";
     final String name_object_1 = "Объект 1";
     final String source_1 = "Тревога 1";
-    final String full_name_object_2 = "Объекты.Test 3.Объект 1";
-    final String name_object_2 = "Объект 1";
-    final String source_2 = "Тревога 1";
+    final String full_name_object_2 = "Объекты.Test 3.Object 2";
+    final String name_object_2 = "Object 2";
+    final String source_2 = "Alarm 2";
 
 
     ThreadLocal<WebDriver> driver = new ThreadLocal<>();
@@ -49,7 +49,7 @@ public class MainTest {
         driver.set(new ChromeDriver());
         //Полноэкранный режим driver.manage().window().maximize();
     }
-
+/*
     @Test
     @DisplayName("Проверка отображения пользовательского параметра тревоги в журнале (русские символы)")
     public void test1() throws InterruptedException {
@@ -86,7 +86,7 @@ public class MainTest {
         aJournal2.preparation();
         aJournal2.compareColor(color_act,color_deact,color_ack);
     }
-
+*/
     @Test
     @DisplayName("Что-то там")
     public void test4() throws InterruptedException {
@@ -98,8 +98,8 @@ public class MainTest {
         aJournal3.acked(message_1_input, comment_1_input, full_name_object_1, name_object_1, source_1);
         aJournal3.on(message_1_input, comment_1_input, full_name_object_1, name_object_1, source_1);
         aJournal3.off(message_1_input, comment_1_input, full_name_object_1, name_object_1, source_1);
-
     }
+
     @Test
     @DisplayName("Что-то там еще")
     public void test5() throws InterruptedException {
