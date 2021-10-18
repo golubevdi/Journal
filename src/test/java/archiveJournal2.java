@@ -81,14 +81,14 @@ public class archiveJournal2 extends MainTest{
 
     }
     @Step("Проверка цветов")
-    public void compareColor(String color_act, String color_deact, String color_ack) throws InterruptedException{
+    public void compareColor(String color_act, String color_deact, String color_ack, String color_act_2, String color_deact_2) throws InterruptedException{
         JavascriptExecutor jse = (JavascriptExecutor) driver;
         //Поиск цвета у события "Появление" Тревоги 1
         WebElement color_message_active = (WebElement)
                 jse.executeScript
                         ("return document.querySelector(\"#\\\\39 4664\").shadowRoot.querySelector(' tr:nth-child(5)')");
         String col_activ = color_message_active.getAttribute("style");
-        System.out.println("цвет события появление: "+col_activ);
+        System.out.println("цвет события появление тревоги 1: "+col_activ);
         //Ожидание
         Thread.sleep(2000);
         //Поиск цвета у события "Исчезновение" Тревоги 1
@@ -96,17 +96,34 @@ public class archiveJournal2 extends MainTest{
                 jse.executeScript
                         ("return document.querySelector(\"#\\\\39 4664\").shadowRoot.querySelector(' tr:nth-child(3)')");
         String col_deact = color_message_deactiv.getAttribute("style");
-        System.out.println("цвет события исчезновение: "+col_deact);
+        System.out.println("цвет события исчезновение тревоги 1: "+col_deact);
         //Поиск цвета у события "Квитирование" Тревоги 1
         WebElement color_message_acked = (WebElement)
                 jse.executeScript
                         ("return document.querySelector(\"#\\\\39 4664\").shadowRoot.querySelector(' tr:nth-child(4')");
         String col_acked = color_message_acked.getAttribute("style");
-        System.out.println("цвет события квитирования: "+col_acked);
+        System.out.println("цвет события квитирования тревоги 1: "+col_acked);
+
+        //Поиск цвета у события "Исчезновение" Тревоги 2
+        WebElement color_message_deactiv_2 = (WebElement)
+                jse.executeScript
+                        ("return document.querySelector(\"#\\\\39 4664\").shadowRoot.querySelector(\"tbody>tr\")");
+        String col_deact_2 = color_message_deactiv_2.getAttribute("style");
+        System.out.println("цвет события исчезновение тревоги 2: "+col_deact_2);
+
+        //Поиск цвета у события "Появление" Тревоги 2
+        WebElement color_message_active_2 = (WebElement)
+                jse.executeScript
+                        ("return document.querySelector(\"#\\\\39 4664\").shadowRoot.querySelector(' tr:nth-child(2)')");
+        String col_activ_2 = color_message_active_2.getAttribute("style");
+        System.out.println("цвет события появление тревоги 1: "+col_activ_2);
+
         //Сравнение цветов
         Assertions.assertEquals(color_act, col_activ);
         Assertions.assertEquals(color_deact, col_deact);
         Assertions.assertEquals(color_ack, col_acked);
+        Assertions.assertEquals(color_deact_2, col_deact_2);
+        Assertions.assertEquals(color_act_2, col_activ_2);
         //Ожидание перед закрытием
         Thread.sleep(10000);
     }

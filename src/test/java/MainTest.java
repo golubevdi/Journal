@@ -18,9 +18,11 @@ public class MainTest {
     final String comment_input_1 = "acked";
 
     //Параметр для проверки теста 3
-    final String color_act = "background-color: aqua;";
-    final String color_deact = "background-color: gold;";
-    final String color_ack = "background-color: crimson;";
+    final String color_act_1 = "background-color: aqua;";
+    final String color_deact_1 = "background-color: gold;";
+    final String color_ack_1 = "background-color: crimson;";
+    final String color_act_2 = "background-color: chartreuse; font-style: italic;";
+    final String color_deact_2 = "background-color: darkgray;";
 
     //Параметр для проверки теста 4
     final String message_1_input = "сообщение";
@@ -49,7 +51,7 @@ public class MainTest {
         driver.set(new ChromeDriver());
         //Полноэкранный режим driver.manage().window().maximize();
     }
-
+/*
     @Test
     @DisplayName("Проверка отображения пользовательского параметра тревоги в журнале (русские символы)")
     public void test1() throws InterruptedException {
@@ -76,6 +78,8 @@ public class MainTest {
         aJournal1.fileCSV(parameter_1_input_1, comment_input_1);
         aJournal1.deleteFile();
     }
+
+ */
     @Test
     @DisplayName("Issue 21417: Свойство Состояние+Приоритет для журнала")
     public void test3() throws InterruptedException {
@@ -84,9 +88,9 @@ public class MainTest {
 
         aJournal2.StartTest();
         aJournal2.preparation();
-        aJournal2.compareColor(color_act,color_deact,color_ack);
+        aJournal2.compareColor(color_act_1, color_deact_1, color_ack_1, color_act_2, color_deact_2);
     }
-
+/*
     @Test
     @DisplayName("Что-то там")
     public void test4() throws InterruptedException {
@@ -111,4 +115,5 @@ public class MainTest {
         aJournal3.on(message_2_input,comment_2_input,full_name_object_2,name_object_2,source_2);
         aJournal3.off(message_2_input,comment_2_input,full_name_object_2,name_object_2,source_2);
     }
+*/
 }
