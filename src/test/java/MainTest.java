@@ -48,7 +48,8 @@ public class MainTest {
         //Создаем новый объект chromedriver
         driver.set(new ChromeDriver());
         //Полноэкранный режим driver.manage().window().maximize();
-    }/*
+    }
+
     @Test
     @DisplayName("Проверка отображения пользовательского параметра тревоги в журнале (русские символы)")
     public void test1() throws InterruptedException {
@@ -84,7 +85,7 @@ public class MainTest {
         aJournal2.StartTest();
         aJournal2.preparation();
         aJournal2.compareColor(color_act,color_deact,color_ack);
-    }*/
+    }
 
     @Test
     @DisplayName("Что-то там")
@@ -98,7 +99,7 @@ public class MainTest {
         aJournal3.on(message_1_input, comment_1_input, full_name_object_1, name_object_1, source_1);
         aJournal3.off(message_1_input, comment_1_input, full_name_object_1, name_object_1, source_1);
 
-    }/*
+    }
     @Test
     @DisplayName("Что-то там еще")
     public void test5() throws InterruptedException {
@@ -109,5 +110,5 @@ public class MainTest {
         aJournal3.acked(message_2_input,comment_2_input,full_name_object_2,name_object_2,source_2);
         aJournal3.on(message_2_input,comment_2_input,full_name_object_2,name_object_2,source_2);
         aJournal3.off(message_2_input,comment_2_input,full_name_object_2,name_object_2,source_2);
-    }*/
+    }
 }

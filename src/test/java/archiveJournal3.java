@@ -152,8 +152,10 @@ public class archiveJournal3 extends MainTest{
         //Проверки
         Assertions.assertEquals("Квитирование",ackedText1);
         Assertions.assertEquals(inc1, priorityAckedText1);
-        //Assertions.assertEquals(message_1_input, messageAckText1); //есть ошибка
-        //Assertions.assertEquals(comment_1_input, commentAckText1); //есть ошибка
+        //есть ошибка
+        Assertions.assertEquals(message_1_input, messageAckText1);
+        Assertions.assertEquals(comment_1_input, commentAckText1);
+
         Assertions.assertEquals(full_name_object,fullNameObjectAckText1);
         Assertions.assertEquals(name_object,nameObjectAckText1);
         Assertions.assertEquals(source,sourceAckText1);
@@ -236,8 +238,11 @@ public class archiveJournal3 extends MainTest{
         //Проверки
         Assertions.assertEquals("Появление",onText1);
         Assertions.assertEquals(inc1, priorityOnText1);
-        //Assertions.assertEquals(message_1_input, messageOnText1); //есть ошибка
-        //Assertions.assertEquals(comment_1_input, commentOnText1); //есть ошибка
+
+        //есть ошибка
+        Assertions.assertEquals(message_1_input, messageOnText1);
+        Assertions.assertEquals(comment_1_input, commentOnText1);
+
         Assertions.assertEquals(full_name_object,fullNameObjectOnText1);
         Assertions.assertEquals(name_object,nameObjectOnText1);
         Assertions.assertEquals(source,sourceOnText1);
@@ -319,8 +324,10 @@ public class archiveJournal3 extends MainTest{
         //Проверки
         Assertions.assertEquals("Исчезновение",offText1);
         Assertions.assertEquals(inc1, priorityOffText1);
-        //Assertions.assertEquals(message_1_input, messageOffText1); //есть ошибка
-        //Assertions.assertEquals(comment_1_input, commentOffText1); //есть ошибка
+        //есть ошибка
+        Assertions.assertEquals(message_1_input, messageOffText1);
+        Assertions.assertEquals(comment_1_input, commentOffText1);
+
         Assertions.assertEquals(full_name_object,fullNameObjectOffText1);
         Assertions.assertEquals(name_object,nameObjectOffText1);
         Assertions.assertEquals(source,sourceOffText1);
