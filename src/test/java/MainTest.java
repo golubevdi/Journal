@@ -49,7 +49,7 @@ public class MainTest {
         driver.set(new ChromeDriver());
         //Полноэкранный режим driver.manage().window().maximize();
     }
-/*
+
     @Test
     @DisplayName("Проверка отображения пользовательского параметра тревоги в журнале (русские символы)")
     public void test1() throws InterruptedException {
@@ -86,7 +86,7 @@ public class MainTest {
         aJournal2.preparation();
         aJournal2.compareColor(color_act,color_deact,color_ack);
     }
-*/
+
     @Test
     @DisplayName("Что-то там")
     public void test4() throws InterruptedException {
