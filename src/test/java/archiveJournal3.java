@@ -80,14 +80,7 @@ public class archiveJournal3 extends MainTest{
         driver.findElement(activateButton1).click();
         Thread.sleep(2000);
 
-        //вытащить текст из инкремента
-        //
-        String search_text_inc_1 = (String)
-                jse.executeScript
-                        ("return document.querySelector(\"#\\\\31 03434\").shadowRoot.querySelector(\"#numberTextBox\").value");
-        //
-        //String s = search_text_inc_1.getText();
-        System.out.println("ИИИнкреееемент: " + search_text_inc_1);
+
 
     }
     @Step("Проверка столбцов журнала у события квитирование Тревоги")
@@ -147,18 +140,18 @@ public class archiveJournal3 extends MainTest{
 
         String inc1 ="";
         if (message_1_input.equals("сообщение")) {
-            //Поиск значения инкремента 1 (через текст)
-            WebElement text_inc = (WebElement)
+            //вытащить текст из инкремента
+            String search_text_inc_1 = (String)
                     jse.executeScript
-                            ("return document.querySelector(\"#\\\\31 08016\").shadowRoot.querySelector(\"div\")");
-            inc1 = text_inc.getText();
+                            ("return document.querySelector(\"#\\\\31 03434\").shadowRoot.querySelector(\"#numberTextBox\").value");
+            inc1 = search_text_inc_1;
 
         } else if(message_1_input.equals("message")) {
-            //Поиск значения инкремента 2 (через текст)
-            WebElement text_inc_2 = (WebElement)
+            //вытащить текст из инкремента 2
+            String text_inc_2 = (String)
                     jse.executeScript
-                            ("return document.querySelector(\"#\\\\31 08031\").shadowRoot.querySelector(\"div\")");
-            inc1 = text_inc_2.getText();
+                            ("return document.querySelector(\"#\\\\31 04066\").shadowRoot.querySelector(\"#numberTextBox\").value");
+            inc1 = text_inc_2;
         }
 
         //Вывод параметров в консоль
@@ -253,17 +246,17 @@ public class archiveJournal3 extends MainTest{
 
         String inc1 ="";
         if (message_1_input.equals("сообщение")) {
-            //Поиск значения инкремента 1 (через текст)
-            WebElement text_inc = (WebElement)
+            //вытащить текст из инкремента
+            String search_text_inc_1 = (String)
                     jse.executeScript
-                            ("return document.querySelector(\"#\\\\31 08016\").shadowRoot.querySelector(\"div\")");
-            inc1 = text_inc.getText();
+                            ("return document.querySelector(\"#\\\\31 03434\").shadowRoot.querySelector(\"#numberTextBox\").value");
+            inc1 = search_text_inc_1;
         } else if(message_1_input.equals("message")) {
-            //Поиск значения инкремента 2 (через текст)
-            WebElement text_inc_2 = (WebElement)
+            //вытащить текст из инкремента 2
+            String text_inc_2 = (String)
                     jse.executeScript
-                            ("return document.querySelector(\"#\\\\31 08031\").shadowRoot.querySelector(\"div\")");
-            inc1 = text_inc_2.getText();
+                            ("return document.querySelector(\"#\\\\31 04066\").shadowRoot.querySelector(\"#numberTextBox\").value");
+            inc1 = text_inc_2;
         }
         //Проверки
         Assertions.assertEquals("Появление",onText1);
@@ -347,17 +340,17 @@ public class archiveJournal3 extends MainTest{
 
         String inc1 ="";
         if (message_1_input.equals("сообщение")) {
-            //Поиск значения инкремента 1 (через текст)
-            WebElement text_inc = (WebElement)
+            //вытащить текст из инкремента 1
+            String search_text_inc_1 = (String)
                     jse.executeScript
-                            ("return document.querySelector(\"#\\\\31 08016\").shadowRoot.querySelector(\"div\")");
-            inc1 = text_inc.getText();
+                            ("return document.querySelector(\"#\\\\31 03434\").shadowRoot.querySelector(\"#numberTextBox\").value");
+            inc1 = search_text_inc_1;
         } else if(message_1_input.equals("message")) {
-            //Поиск значения инкремента 2 (через текст)
-            WebElement text_inc_2 = (WebElement)
+            //вытащить текст из инкремента 2
+            String text_inc_2 = (String)
                     jse.executeScript
-                            ("return document.querySelector(\"#\\\\31 08031\").shadowRoot.querySelector(\"div\")");
-            inc1 = text_inc_2.getText();
+                            ("return document.querySelector(\"#\\\\31 04066\").shadowRoot.querySelector(\"#numberTextBox\").value");
+            inc1 = text_inc_2;
         }
 
         //Проверки
@@ -397,11 +390,11 @@ public class archiveJournal3 extends MainTest{
         if (aClass2.equals("tbmain button active")) {
             driver.findElement(activateButton2).click();
         }
-        //Поиск значения инкремента 2 (через текст)
-        WebElement text_inc_2 = (WebElement)
+        //вытащить текст из инкремента 2
+        String text_inc_2 = (String)
                 jse.executeScript
-                        ("return document.querySelector(\"#\\\\31 08031\").shadowRoot.querySelector(\"div\")");
-        String incText2 = text_inc_2.getText();
+                        ("return document.querySelector(\"#\\\\31 04066\").shadowRoot.querySelector(\"#numberTextBox\").value");
+        String incText2 = text_inc_2;
 
         //Поиск элемента для задания сообщения Тревоги 2 и задание ему значения "сообщение"
         driver.findElement(textMessage2).sendKeys(message_2_input);

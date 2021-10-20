@@ -99,11 +99,11 @@ public class MainTest {
 
         aJournal3.StartTest();
         aJournal3.alarm1(message_1_input, comment_1_input);
-        //aJournal3.acked(message_1_input, comment_1_input, full_name_object_1, name_object_1, source_1);
-        //aJournal3.on(message_1_input, comment_1_input, full_name_object_1, name_object_1, source_1);
-        //aJournal3.off(message_1_input, comment_1_input, full_name_object_1, name_object_1, source_1);
+        aJournal3.acked(message_1_input, comment_1_input, full_name_object_1, name_object_1, source_1);
+        aJournal3.on(message_1_input, comment_1_input, full_name_object_1, name_object_1, source_1);
+        aJournal3.off(message_1_input, comment_1_input, full_name_object_1, name_object_1, source_1);
     }
-/*
+
     @Test
     @DisplayName("Что-то там еще")
     public void test5() throws InterruptedException {
@@ -115,5 +115,4 @@ public class MainTest {
         aJournal3.on(message_2_input,comment_2_input,full_name_object_2,name_object_2,source_2);
         aJournal3.off(message_2_input,comment_2_input,full_name_object_2,name_object_2,source_2);
     }
-*/
 }
