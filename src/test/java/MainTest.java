@@ -92,7 +92,7 @@ public class MainTest {
     }
 
     @Test
-    @DisplayName("Проверка отображения сообщений в журнале с русскими символами")
+    @DisplayName("Проверка отображения сообщений в журнале (русские символы)")
     public void test4() throws InterruptedException {
 
         archiveJournal3 aJournal3 = new archiveJournal3(driver.get());
@@ -105,7 +105,7 @@ public class MainTest {
     }
 
     @Test
-    @DisplayName("Проверка отображения сообщений в журнале с английскими символами")
+    @DisplayName("Проверка отображения сообщений в журнале (английские символы)")
     public void test5() throws InterruptedException {
         archiveJournal3 aJournal3 = new archiveJournal3(driver.get());
 
@@ -117,11 +117,19 @@ public class MainTest {
     }
 /*
     @Test
-    @DisplayName("Проверка отображения сообщений в журнале с русскими символами после применения фильтров")
+    @DisplayName("Проверка отображения сообщений в журнале после применения фильтров (русские символы)")
     public void test6() throws InterruptedException {
         archiveJournal3 aJournal3 = new archiveJournal3(driver.get());
 
         aJournal3.StartTest();
         aJournal3.filters();
-    }*/
+    }
+    @Test
+    @DisplayName("Проверка отображения сообщений в журнале после применения фильтров (английские символы)")
+    public void test7() throws InterruptedException {
+        archiveJournal3 aJournal3 = new archiveJournal3(driver.get());
+
+        aJournal3.StartTest();
+    }
+    */
 }
