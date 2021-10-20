@@ -79,7 +79,7 @@ public class MainTest {
         aJournal1.deleteFile();
     }
 
- */
+
     @Test
     @DisplayName("Issue 21417: Свойство Состояние+Приоритет для журнала")
     public void test3() throws InterruptedException {
@@ -90,7 +90,7 @@ public class MainTest {
         aJournal2.preparation();
         aJournal2.compareColor(color_act_1, color_deact_1, color_ack_1, color_act_2, color_deact_2);
     }
-/*
+*/
     @Test
     @DisplayName("Что-то там")
     public void test4() throws InterruptedException {
@@ -99,11 +99,11 @@ public class MainTest {
 
         aJournal3.StartTest();
         aJournal3.alarm1(message_1_input, comment_1_input);
-        aJournal3.acked(message_1_input, comment_1_input, full_name_object_1, name_object_1, source_1);
-        aJournal3.on(message_1_input, comment_1_input, full_name_object_1, name_object_1, source_1);
-        aJournal3.off(message_1_input, comment_1_input, full_name_object_1, name_object_1, source_1);
+        //aJournal3.acked(message_1_input, comment_1_input, full_name_object_1, name_object_1, source_1);
+        //aJournal3.on(message_1_input, comment_1_input, full_name_object_1, name_object_1, source_1);
+        //aJournal3.off(message_1_input, comment_1_input, full_name_object_1, name_object_1, source_1);
     }
-
+/*
     @Test
     @DisplayName("Что-то там еще")
     public void test5() throws InterruptedException {

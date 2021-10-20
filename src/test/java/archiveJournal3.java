@@ -79,6 +79,16 @@ public class archiveJournal3 extends MainTest{
         //Поиск кнопки "Активность" Тревоги 1 и клик по ней (кнопка с фиксацией, положение выкл.)
         driver.findElement(activateButton1).click();
         Thread.sleep(2000);
+
+        //вытащить текст из инкремента
+        //
+        String search_text_inc_1 = (String)
+                jse.executeScript
+                        ("return document.querySelector(\"#\\\\31 03434\").shadowRoot.querySelector(\"#numberTextBox\").value");
+        //
+        //String s = search_text_inc_1.getText();
+        System.out.println("ИИИнкреееемент: " + search_text_inc_1);
+
     }
     @Step("Проверка столбцов журнала у события квитирование Тревоги")
     public void acked(String message_1_input, String comment_1_input,
