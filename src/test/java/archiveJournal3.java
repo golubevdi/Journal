@@ -141,17 +141,15 @@ public class archiveJournal3 extends MainTest{
         String inc1 ="";
         if (message_1_input.equals("сообщение")) {
             //вытащить текст из инкремента
-            String search_text_inc_1 = (String)
+            inc1 = (String)
                     jse.executeScript
                             ("return document.querySelector(\"#\\\\31 03434\").shadowRoot.querySelector(\"#numberTextBox\").value");
-            inc1 = search_text_inc_1;
 
         } else if(message_1_input.equals("message")) {
             //вытащить текст из инкремента 2
-            String text_inc_2 = (String)
+            inc1 = (String)
                     jse.executeScript
                             ("return document.querySelector(\"#\\\\31 04066\").shadowRoot.querySelector(\"#numberTextBox\").value");
-            inc1 = text_inc_2;
         }
 
         //Вывод параметров в консоль
@@ -247,16 +245,14 @@ public class archiveJournal3 extends MainTest{
         String inc1 ="";
         if (message_1_input.equals("сообщение")) {
             //вытащить текст из инкремента
-            String search_text_inc_1 = (String)
+            inc1 = (String)
                     jse.executeScript
                             ("return document.querySelector(\"#\\\\31 03434\").shadowRoot.querySelector(\"#numberTextBox\").value");
-            inc1 = search_text_inc_1;
         } else if(message_1_input.equals("message")) {
             //вытащить текст из инкремента 2
-            String text_inc_2 = (String)
+            inc1 = (String)
                     jse.executeScript
                             ("return document.querySelector(\"#\\\\31 04066\").shadowRoot.querySelector(\"#numberTextBox\").value");
-            inc1 = text_inc_2;
         }
         //Проверки
         Assertions.assertEquals("Появление",onText1);
@@ -341,16 +337,14 @@ public class archiveJournal3 extends MainTest{
         String inc1 ="";
         if (message_1_input.equals("сообщение")) {
             //вытащить текст из инкремента 1
-            String search_text_inc_1 = (String)
+            inc1 = (String)
                     jse.executeScript
                             ("return document.querySelector(\"#\\\\31 03434\").shadowRoot.querySelector(\"#numberTextBox\").value");
-            inc1 = search_text_inc_1;
         } else if(message_1_input.equals("message")) {
             //вытащить текст из инкремента 2
-            String text_inc_2 = (String)
+            inc1 = (String)
                     jse.executeScript
                             ("return document.querySelector(\"#\\\\31 04066\").shadowRoot.querySelector(\"#numberTextBox\").value");
-            inc1 = text_inc_2;
         }
 
         //Проверки
@@ -391,10 +385,9 @@ public class archiveJournal3 extends MainTest{
             driver.findElement(activateButton2).click();
         }
         //вытащить текст из инкремента 2
-        String text_inc_2 = (String)
+        String incText2 = (String)
                 jse.executeScript
                         ("return document.querySelector(\"#\\\\31 04066\").shadowRoot.querySelector(\"#numberTextBox\").value");
-        String incText2 = text_inc_2;
 
         //Поиск элемента для задания сообщения Тревоги 2 и задание ему значения "сообщение"
         driver.findElement(textMessage2).sendKeys(message_2_input);
@@ -425,6 +418,31 @@ public class archiveJournal3 extends MainTest{
         //Поиск кнопки "Активность" Тревоги 1 и клик по ней (кнопка с фиксацией, положение выкл.)
         driver.findElement(activateButton2).click();
         Thread.sleep(10000);
+    }
+
+    @Step("Включение фильтров")
+    public void filters() throws InterruptedException{
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
+        //Ожидание (загрузка страницы, элементов)
+        Thread.sleep(2000);
+        //Поиск кнопки с переходом на окно теста 2
+        driver.findElement(test3Button).click();
+        //Ожидание (загрузка страницы, элементов)
+        Thread.sleep(2000);
+
+        WebElement button_filters = (WebElement)
+                jse.executeScript
+                        ("return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"#toolbar\").shadowRoot.querySelector(\"#toolbar > div.btn.hmi-j-filter\")");
+        //Из поля в параметр String
+        button_filters.click();
+        //Ожидание
+        Thread.sleep(1000);
+        WebElement filter_1 = (WebElement)
+                jse.executeScript
+                        ("return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"#f_0\")");
+        //Из поля в параметр String
+        filter_1.click();
+        Thread.sleep(5000);
     }
 }
 

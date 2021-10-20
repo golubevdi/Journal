@@ -51,7 +51,7 @@ public class MainTest {
         driver.set(new ChromeDriver());
         //Полноэкранный режим driver.manage().window().maximize();
     }
-/*
+
     @Test
     @DisplayName("Проверка отображения пользовательского параметра тревоги в журнале (русские символы)")
     public void test1() throws InterruptedException {
@@ -90,9 +90,9 @@ public class MainTest {
         aJournal2.preparation();
         aJournal2.compareColor(color_act_1, color_deact_1, color_ack_1, color_act_2, color_deact_2);
     }
-*/
+
     @Test
-    @DisplayName("Что-то там")
+    @DisplayName("Проверка отображения сообщПроверка отображения сообщений в журнале с русскими символамиений в журнале с русскими символами")
     public void test4() throws InterruptedException {
 
         archiveJournal3 aJournal3 = new archiveJournal3(driver.get());
@@ -105,7 +105,7 @@ public class MainTest {
     }
 
     @Test
-    @DisplayName("Что-то там еще")
+    @DisplayName("Проверка отображения сообщений в журнале с английскими символами")
     public void test5() throws InterruptedException {
         archiveJournal3 aJournal3 = new archiveJournal3(driver.get());
 
@@ -115,4 +115,13 @@ public class MainTest {
         aJournal3.on(message_2_input,comment_2_input,full_name_object_2,name_object_2,source_2);
         aJournal3.off(message_2_input,comment_2_input,full_name_object_2,name_object_2,source_2);
     }
+/*
+    @Test
+    @DisplayName("Проверка отображения сообщений в журнале с русскими символами после применения фильтров")
+    public void test6() throws InterruptedException {
+        archiveJournal3 aJournal3 = new archiveJournal3(driver.get());
+
+        aJournal3.StartTest();
+        aJournal3.filters();
+    }*/
 }
