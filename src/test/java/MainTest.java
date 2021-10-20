@@ -92,7 +92,7 @@ public class MainTest {
     }
 
     @Test
-    @DisplayName("Проверка отображения сообщПроверка отображения сообщений в журнале с русскими символамиений в журнале с русскими символами")
+    @DisplayName("Проверка отображения сообщений в журнале с русскими символами")
     public void test4() throws InterruptedException {
 
         archiveJournal3 aJournal3 = new archiveJournal3(driver.get());
