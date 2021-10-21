@@ -90,7 +90,7 @@ public class MainTest {
         aJournal2.preparation();
         aJournal2.compareColor(color_act_1, color_deact_1, color_ack_1, color_act_2, color_deact_2);
     }
-
+*/
     @Test
     @DisplayName("Проверка отображения сообщений в журнале (русские символы)")
     public void test4() throws InterruptedException {
@@ -115,7 +115,7 @@ public class MainTest {
         aJournal3.on(message_2_input,comment_2_input,full_name_object_2,name_object_2,source_2);
         aJournal3.off(message_2_input,comment_2_input,full_name_object_2,name_object_2,source_2);
     }
-*/
+/*
     @Test
     @DisplayName("Проверка отображения сообщений в журнале после применения фильтров (русские символы)")
     public void test6() throws InterruptedException {
@@ -124,7 +124,7 @@ public class MainTest {
         aJournal3.StartTest();
         aJournal3.filters();
     }
-    /*
+
     @Test
     @DisplayName("Проверка отображения сообщений в журнале после применения фильтров (английские символы)")
     public void test7() throws InterruptedException {

@@ -1,9 +1,6 @@
 import io.qameta.allure.Step;
 import org.junit.jupiter.api.Assertions;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 
 
 public class archiveJournal3 extends MainTest{
@@ -15,7 +12,8 @@ public class archiveJournal3 extends MainTest{
     public static final By textComment1 = By.id("104002");
     public static final By textMessage2 = By.id("104083");
     public static final By textComment2 = By.id("104100");
-
+    public static final By resetButton1 = By.id("120081");
+    public static final By resetButton2 = By.id("120120");
 
 
     public archiveJournal3(WebDriver driver) {
@@ -52,13 +50,30 @@ public class archiveJournal3 extends MainTest{
         }
         Thread.sleep(2000);
 
+        //Сброс сообщений
+        driver.findElement(resetButton1).click();
+
+
+        //Проверка есть ли значение в инкременте 1
+        String s_inc = (String)
+                jse.executeScript
+                        ("return document.querySelector(\"#\\\\31 03434\").shadowRoot.querySelector(\"#numberTextBox\").value");
+        while (!s_inc.equals("0")){
+            WebElement search_button_inc_down = (WebElement)
+                    jse.executeScript
+                            ("return document.querySelector(\"#\\\\31 03434\").shadowRoot.querySelector(\"#decr\")");
+            search_button_inc_down.click();
+            s_inc = (String)
+                    jse.executeScript
+                            ("return document.querySelector(\"#\\\\31 03434\").shadowRoot.querySelector(\"#numberTextBox\").value");
+        }
+        Thread.sleep(2000);
         //Увеличиваем значение инкремента Тревоги 1
         WebElement search_button_inc_up = (WebElement)
                 jse.executeScript
                         ("return document.querySelector(\"#\\\\31 03434\").shadowRoot.querySelector(\"#incr\")");
         search_button_inc_up.click();
         Thread.sleep(2000);
-
 
         //Поиск элемента для задания сообщения Тревоги 1 и задание ему значения "сообщение"
         driver.findElement(textMessage1).sendKeys(message_1_input);
@@ -75,6 +90,8 @@ public class archiveJournal3 extends MainTest{
                         ("return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelectorAll(\".ack\")[0]");
         //Клик по кнопке
         search_button1.click();
+        Thread.sleep(2000);
+
         Thread.sleep(2000);
         //Поиск кнопки "Активность" Тревоги 1 и клик по ней (кнопка с фиксацией, положение выкл.)
         driver.findElement(activateButton1).click();
@@ -168,7 +185,7 @@ public class archiveJournal3 extends MainTest{
         Assertions.assertEquals(inc1, priorityAckedText1);
 
         //есть ошибка
-        //Assertions.assertEquals(message_1_input, messageAckText1);
+        Assertions.assertEquals(message_1_input, messageAckText1);
         //Assertions.assertEquals(comment_1_input, commentAckText1);
 
         Assertions.assertEquals(full_name_object,fullNameObjectAckText1);
@@ -259,7 +276,7 @@ public class archiveJournal3 extends MainTest{
         Assertions.assertEquals(inc1, priorityOnText1);
 
         //есть ошибка
-        //Assertions.assertEquals(message_1_input, messageOnText1);
+        Assertions.assertEquals(message_1_input, messageOnText1);
         //Assertions.assertEquals(comment_1_input, commentOnText1);
 
         Assertions.assertEquals(full_name_object,fullNameObjectOnText1);
@@ -352,7 +369,7 @@ public class archiveJournal3 extends MainTest{
         Assertions.assertEquals(inc1, priorityOffText1);
 
         //есть ошибка
-        //Assertions.assertEquals(message_1_input, messageOffText1);
+        Assertions.assertEquals(message_1_input, messageOffText1);
         //Assertions.assertEquals(comment_1_input, commentOffText1);
 
         Assertions.assertEquals(full_name_object,fullNameObjectOffText1);
@@ -384,6 +401,8 @@ public class archiveJournal3 extends MainTest{
         if (aClass2.equals("tbmain button active")) {
             driver.findElement(activateButton2).click();
         }
+
+
         //вытащить текст из инкремента 2
         String incText2 = (String)
                 jse.executeScript
@@ -397,6 +416,20 @@ public class archiveJournal3 extends MainTest{
         //вывод значения инкремента Тревоги 2 в консоль
         System.out.println("приоритет тревоги 2: " + incText2);
         Thread.sleep(2000);
+
+        String s_inc = (String)
+                jse.executeScript
+                        ("return document.querySelector(\"#\\\\31 04066\").shadowRoot.querySelector(\"#numberTextBox\").value");
+        while (!s_inc.equals("0")){
+            WebElement search_button_inc_down = (WebElement)
+                    jse.executeScript
+                            ("return document.querySelector(\"#\\\\31 04066\").shadowRoot.querySelector(\"#decr\")");
+            search_button_inc_down.click();
+            s_inc = (String)
+                    jse.executeScript
+                            ("return document.querySelector(\"#\\\\31 04066\").shadowRoot.querySelector(\"#numberTextBox\").value");
+        }
+
         //Увеличиваем значение инкремента Тревоги 2
         WebElement search_button_inc_up_2 = (WebElement)
                 jse.executeScript
@@ -415,6 +448,10 @@ public class archiveJournal3 extends MainTest{
         //Клик по кнопке
         search_button2.click();
         Thread.sleep(2000);
+
+        //сброс сообщения
+        driver.findElement(resetButton2).click();
+
         //Поиск кнопки "Активность" Тревоги 1 и клик по ней (кнопка с фиксацией, положение выкл.)
         driver.findElement(activateButton2).click();
         Thread.sleep(10000);
