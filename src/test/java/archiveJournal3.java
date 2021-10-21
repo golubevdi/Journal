@@ -438,25 +438,29 @@ public class archiveJournal3 extends MainTest{
                             ("return document.querySelector(\"#\\\\31 04066\").shadowRoot.querySelector(\"#numberTextBox\").value");
         }
         Thread.sleep(1000);
+
         //Увеличиваем значение инкремента Тревоги 2
         WebElement search_button_inc_up_2 = (WebElement)
                 jse.executeScript
                         ("return document.querySelector(\"#\\\\31 04066\").shadowRoot.querySelector(\"#incr\")");
-        search_button_inc_up_2.click();
 
+        search_button_inc_up_2.click();
         Thread.sleep(1000);
+
         search_button_inc_up_2.click();
         Thread.sleep(2000);
 
         //Поиск кнопки "Активность" Тревоги 1 и клик по ней (кнопка с фиксацией, положение вкл.)
         driver.findElement(activateButton2).click();
         Thread.sleep(2000);
+
         //Поиск кнопки "квит" у последнего появившегося сообщения в архивном журнале
         WebElement search_button2 = (WebElement)
                 jse.executeScript
                         ("return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelectorAll(\".ack\")[0]");
         //Клик по кнопке
         search_button2.click();
+
         Thread.sleep(2000);
 
         //сброс сообщения
@@ -464,6 +468,7 @@ public class archiveJournal3 extends MainTest{
 
         //Поиск кнопки "Активность" Тревоги 1 и клик по ней (кнопка с фиксацией, положение выкл.)
         driver.findElement(activateButton2).click();
+
         Thread.sleep(10000);
     }
 
@@ -498,8 +503,6 @@ public class archiveJournal3 extends MainTest{
                 jse.executeScript
                         ("return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"div > div:nth-child(2) > table > tbody\").childElementCount");
         System.out.println("Кол-во сообщений: " + events_count);
-
-
 
         //Проверка фильтра Приоритет = 1 по всем сообщениям после применения фильтра
         while(events_count!=0){
@@ -550,7 +553,6 @@ public class archiveJournal3 extends MainTest{
                 jse.executeScript
                         ("return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"div > div:nth-child(2) > table > tbody\").childElementCount");
         System.out.println("Кол-во сообщений: " + events_count);
-
 
         //Проверка фильтра Приоритет = 2 по всем сообщениям после применения фильтра
         while(events_count!=0){
