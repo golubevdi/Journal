@@ -24,7 +24,7 @@ public class MainTest {
     final String color_act_2 = "background-color: chartreuse; font-style: italic;";
     final String color_deact_2 = "background-color: darkgray;";
 
-    //Параметр для проверки теста 4
+    //Параметр для проверки теста 4 и 5
     final String message_1_input = "сообщение";
     final String comment_1_input = "комментарий";
     final String message_2_input = "message";
@@ -51,7 +51,7 @@ public class MainTest {
         driver.set(new ChromeDriver());
         //Полноэкранный режим driver.manage().window().maximize();
     }
-/*
+
     @Test
     @DisplayName("Проверка отображения пользовательского параметра тревоги в журнале (русские символы)")
     public void test1() throws InterruptedException {
@@ -79,7 +79,6 @@ public class MainTest {
         aJournal1.deleteFile();
     }
 
-
     @Test
     @DisplayName("Issue 21417: Свойство Состояние+Приоритет для журнала")
     public void test3() throws InterruptedException {
@@ -90,7 +89,7 @@ public class MainTest {
         aJournal2.preparation();
         aJournal2.compareColor(color_act_1, color_deact_1, color_ack_1, color_act_2, color_deact_2);
     }
-*/
+
     @Test
     @DisplayName("Проверка отображения сообщений в журнале (русские символы)")
     public void test4() throws InterruptedException {
@@ -115,14 +114,15 @@ public class MainTest {
         aJournal3.on(message_2_input,comment_2_input,full_name_object_2,name_object_2,source_2);
         aJournal3.off(message_2_input,comment_2_input,full_name_object_2,name_object_2,source_2);
     }
-/*
+
     @Test
     @DisplayName("Проверка отображения сообщений в журнале после применения фильтров (русские символы)")
     public void test6() throws InterruptedException {
         archiveJournal3 aJournal3 = new archiveJournal3(driver.get());
 
         aJournal3.StartTest();
-        aJournal3.filters();
+        aJournal3.alarm1(message_1_input, comment_1_input);
+        aJournal3.filter1();
     }
 
     @Test
@@ -131,6 +131,7 @@ public class MainTest {
         archiveJournal3 aJournal3 = new archiveJournal3(driver.get());
 
         aJournal3.StartTest();
+        aJournal3.alarm2(message_2_input,comment_2_input);
+        aJournal3.filter2();
     }
-    */
 }

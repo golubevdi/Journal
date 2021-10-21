@@ -17,9 +17,9 @@ public class archiveJournal3 extends MainTest{
 
 
     public archiveJournal3(WebDriver driver) {
-
         this.driver = driver;
     }
+
     @Step("Начало. Переход на страницу для теста")
     public void StartTest(){
         System.out.println("шаг 1 запуск браузера");
@@ -27,13 +27,17 @@ public class archiveJournal3 extends MainTest{
         String Base_URL = "http://127.0.0.1:8043";
         this.driver.get(Base_URL);
     }
+
     @Step("Активация, квитирование и деактивация Тревоги 1")
     public void alarm1(String message_1_input, String comment_1_input) throws InterruptedException {
         JavascriptExecutor jse = (JavascriptExecutor) driver;
+
         //Ожидание (загрузка страницы, элементов)
         Thread.sleep(2000);
+
         //Поиск кнопки с переходом на окно теста 2
         driver.findElement(test3Button).click();
+
         //Ожидание (загрузка страницы, элементов)
         Thread.sleep(2000);
 
@@ -45,6 +49,7 @@ public class archiveJournal3 extends MainTest{
         System.out.println("Состояние кнопки Активность Тревоги 1 до начала теста: " + aClass1);
         System.out.println("-------------------------------------------------------");
 
+        //Проверка нажата ли кнопка Тревоги 1 (если нажата, то отжать)
         if (aClass1.equals("tbmain button active")) {
             driver.findElement(activateButton1).click();
         }
@@ -52,7 +57,6 @@ public class archiveJournal3 extends MainTest{
 
         //Сброс сообщений
         driver.findElement(resetButton1).click();
-
 
         //Проверка есть ли значение в инкременте 1
         String s_inc = (String)
@@ -63,11 +67,15 @@ public class archiveJournal3 extends MainTest{
                     jse.executeScript
                             ("return document.querySelector(\"#\\\\31 03434\").shadowRoot.querySelector(\"#decr\")");
             search_button_inc_down.click();
+
+            //Ожидание между кликами по инкременту
+            //Thread.wait(500);
             s_inc = (String)
                     jse.executeScript
                             ("return document.querySelector(\"#\\\\31 03434\").shadowRoot.querySelector(\"#numberTextBox\").value");
         }
         Thread.sleep(2000);
+
         //Увеличиваем значение инкремента Тревоги 1
         WebElement search_button_inc_up = (WebElement)
                 jse.executeScript
@@ -77,6 +85,7 @@ public class archiveJournal3 extends MainTest{
 
         //Поиск элемента для задания сообщения Тревоги 1 и задание ему значения "сообщение"
         driver.findElement(textMessage1).sendKeys(message_1_input);
+
         //Поиск элемента для задания комментария Тревоги 1 и задание ему значения "комментарий"
         driver.findElement(textComment1).sendKeys(comment_1_input);
 
@@ -84,6 +93,7 @@ public class archiveJournal3 extends MainTest{
         //Поиск кнопки "Активность" Тревоги 1 и клик по ней (кнопка с фиксацией, положение вкл.)
         driver.findElement(activateButton1).click();
         Thread.sleep(2000);
+
         //Поиск кнопки "квит" у последнего появившегося сообщения в архивном журнале
         WebElement search_button1 = (WebElement)
                 jse.executeScript
@@ -96,10 +106,8 @@ public class archiveJournal3 extends MainTest{
         //Поиск кнопки "Активность" Тревоги 1 и клик по ней (кнопка с фиксацией, положение выкл.)
         driver.findElement(activateButton1).click();
         Thread.sleep(2000);
-
-
-
     }
+
     @Step("Проверка столбцов журнала у события квитирование Тревоги")
     public void acked(String message_1_input, String comment_1_input,
                       String full_name_object, String name_object, String source) throws InterruptedException{
@@ -153,7 +161,6 @@ public class archiveJournal3 extends MainTest{
                         ("return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"tr:nth-child(2) > td:nth-child(11)\")");
         //Из поля в параметр String
         String sourceAckText1 = source_acked_1.getText();
-
 
         String inc1 ="";
         if (message_1_input.equals("сообщение")) {
@@ -425,16 +432,19 @@ public class archiveJournal3 extends MainTest{
                     jse.executeScript
                             ("return document.querySelector(\"#\\\\31 04066\").shadowRoot.querySelector(\"#decr\")");
             search_button_inc_down.click();
+            //Thread.sleep(500);
             s_inc = (String)
                     jse.executeScript
                             ("return document.querySelector(\"#\\\\31 04066\").shadowRoot.querySelector(\"#numberTextBox\").value");
         }
-
+        Thread.sleep(1000);
         //Увеличиваем значение инкремента Тревоги 2
         WebElement search_button_inc_up_2 = (WebElement)
                 jse.executeScript
                         ("return document.querySelector(\"#\\\\31 04066\").shadowRoot.querySelector(\"#incr\")");
         search_button_inc_up_2.click();
+
+        Thread.sleep(1000);
         search_button_inc_up_2.click();
         Thread.sleep(2000);
 
@@ -457,32 +467,106 @@ public class archiveJournal3 extends MainTest{
         Thread.sleep(10000);
     }
 
-    @Step("Включение фильтров")
-    public void filters() throws InterruptedException{
+    @Step("Включение фильтра Приоритет = 1 и проверка")
+    public void filter1() throws InterruptedException{
         JavascriptExecutor jse = (JavascriptExecutor) driver;
         //Ожидание (загрузка страницы, элементов)
         Thread.sleep(2000);
-        //Поиск кнопки с переходом на окно теста 2
-        driver.findElement(test3Button).click();
-        //Ожидание (загрузка страницы, элементов)
-        Thread.sleep(2000);
 
+        //Вход в окно фильтров
         WebElement button_filters = (WebElement)
                 jse.executeScript
                         ("return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"#toolbar\").shadowRoot.querySelector(\"#toolbar > div.btn.hmi-j-filter\")");
-        //Из поля в параметр String
         button_filters.click();
+
         //Ожидание
         Thread.sleep(1000);
         WebElement filter_1 = (WebElement)
                 jse.executeScript
                         ("return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"#f_0\")");
-        //Из поля в параметр String
+        //Активация фильтра
         filter_1.click();
+        Thread.sleep(1000);
+
+        //Выход из окна фильтров
+        button_filters.click();
+
+        Thread.sleep(2000);
+        //кол-во сообщений в журнале
+
+        Long events_count = (Long)
+                jse.executeScript
+                        ("return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"div > div:nth-child(2) > table > tbody\").childElementCount");
+        System.out.println("Кол-во сообщений: " + events_count);
+
+
+
+        //Проверка фильтра Приоритет = 1 по всем сообщениям после применения фильтра
+        while(events_count!=0){
+            String num = events_count.toString();
+            String doc = "return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"tr:nth-child("
+                    + num + ") > td:nth-child(5)\")";
+            WebElement message = (WebElement)
+                    jse.executeScript
+                            (doc);
+            System.out.println("Сообщение №" + num + " = "+ message.getText());
+
+            //Сравнение приоритета сообщения с 1
+            Assertions.assertEquals(message.getText(), "1");
+            events_count--;
+        }
         Thread.sleep(5000);
+    }
+
+    @Step("Включение фильтра Приоритет = 2 и проверка")
+    public void filter2() throws InterruptedException{
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
+
+        //Ожидание (загрузка страницы, элементов)
+        Thread.sleep(2000);
+
+        //Вход в окно фильтров
+        WebElement button_filters = (WebElement)
+                jse.executeScript
+                        ("return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"#toolbar\").shadowRoot.querySelector(\"#toolbar > div.btn.hmi-j-filter\")");
+        button_filters.click();
+
+        //Ожидание
+        Thread.sleep(1000);
+        WebElement filter_2 = (WebElement)
+                jse.executeScript
+                        ("return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"#f_1\")");
+        //Активация фильтра
+        filter_2.click();
+        Thread.sleep(1000);
+
+        //Выход из окна фильтров
+        button_filters.click();
+
+        Thread.sleep(2000);
 
         //кол-во сообщений в журнале
-        //document.querySelector("#\\31 02863").shadowRoot.querySelector("div > div:nth-child(2) > table > tbody").childElementCount
+        Long events_count = (Long)
+                jse.executeScript
+                        ("return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"div > div:nth-child(2) > table > tbody\").childElementCount");
+        System.out.println("Кол-во сообщений: " + events_count);
+
+
+        //Проверка фильтра Приоритет = 2 по всем сообщениям после применения фильтра
+        while(events_count!=0){
+            String num = events_count.toString();
+            String doc = "return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"tr:nth-child("
+                    + num + ") > td:nth-child(5)\")";
+            WebElement message = (WebElement)
+                    jse.executeScript
+                            (doc);
+            System.out.println("Сообщение №" + num + " = "+ message.getText());
+
+            //Сравнение приоритета сообщения с 2
+            Assertions.assertEquals(message.getText(), "2");
+            events_count--;
+        }
+        Thread.sleep(5000);
     }
 }
 

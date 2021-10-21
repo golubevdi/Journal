@@ -22,7 +22,6 @@ public class archiveJournal1 extends MainTest{
     File file = new File(home+"/Downloads/journal.csv");
 
     public archiveJournal1(WebDriver driver) {
-
         this.driver = driver;
     }
 
@@ -38,10 +37,11 @@ public class archiveJournal1 extends MainTest{
 
         System.out.println("шаг 2 переход на страницу теста и активация сообщения");
         JavascriptExecutor jse = (JavascriptExecutor) driver;
+
         //Ожидание (загрузка страницы, элементов)
         Thread.sleep(2000);
-        //Поиск кнопки с переходом на окно теста 1
 
+        //Поиск кнопки с переходом на окно теста 1
         driver.findElement(test1Button).click();
 
         //Ожидание (загрузка страницы, элементов)
@@ -49,6 +49,7 @@ public class archiveJournal1 extends MainTest{
 
         //Поиск кнопки "Сброс" и клик по ней
         driver.findElement(dischargeButton).click();
+
         //Ожидание совершения действия
         Thread.sleep(2000);
 
@@ -59,6 +60,8 @@ public class archiveJournal1 extends MainTest{
 
         String aClass1 = search_button_act1.getAttribute("class");
         System.out.println(aClass1);
+
+        //Если "tbmain button active", то кнопку надо отжать
         if (aClass1.equals("tbmain button active")){
             driver.findElement(activateButton).click();
         }
@@ -72,13 +75,15 @@ public class archiveJournal1 extends MainTest{
 
         //Ожидание появления сообщения в Архивном журнале
         Thread.sleep(2000);
+
         //Поиск поля пользовательского параметра в журнале и получения из него значения
         WebElement text1 = (WebElement)
                 jse.executeScript
                         ("return document.querySelector(\"#\\\\37 7958\").shadowRoot.querySelector(\" td:nth-child(8)\")");
-        //Сравнение что в журнале и что в текстовом вводе
 
+        //Сравнение что в журнале и что в текстовом вводе
         Assertions.assertEquals(text1.getText(), parameter_1_input);
+
         //Ожидание (чтобы успеть все увидеть глазами)
         Thread.sleep(3000);
     }
@@ -87,20 +92,23 @@ public class archiveJournal1 extends MainTest{
     public void AckedMessage(String parameter_1_input, String comment_input) throws InterruptedException{
         System.out.println("шаг 3 квитирование");
         JavascriptExecutor jse = (JavascriptExecutor) driver;
-        //Ожидание (загрузка страницы, элементов)
 
         //Поиск кнопки "квит" у последнего появившегося сообщения в архивном журнале
         WebElement search_button = (WebElement)
                 jse.executeScript
                         ("return document.querySelector(\"#\\\\37 7958\").shadowRoot.querySelectorAll(\".ack\")[0]");
-        //Клик по кнопке
+
+        //Клик по кнопке "квит"
         search_button.click();
+
         //Ожидание появления окна с предложением задать комментарий при квитировании
         Thread.sleep(2000);
+
         //Поиск поля ввода для комментария
         WebElement search_input1 = (WebElement)
                 jse.executeScript
                         ("return document.querySelector(\"#\\\\37 7958\").shadowRoot.querySelector(\"#inp\")");
+
         //Задание комментария
         search_input1.sendKeys(comment_input);
 
@@ -108,6 +116,7 @@ public class archiveJournal1 extends MainTest{
         WebElement search_button1 = (WebElement)
                 jse.executeScript
                         ("return document.querySelector(\"#\\\\37 7958\").shadowRoot.querySelector(\"#btnOk\")");
+
         //Подтверждением квитирования "ок"
         search_button1.click();
 
@@ -118,12 +127,15 @@ public class archiveJournal1 extends MainTest{
         WebElement text1 = (WebElement)
                 jse.executeScript
                         ("return document.querySelector(\"#\\\\37 7958\").shadowRoot.querySelector(\" td:nth-child(8)\")");
+
         //Из поля Параметр_1 в параметр String parameter_1
         String parameter_1_output = text1.getText();
+
         //Поиск У последнего сообщения поля Комментарий
         WebElement text2 = (WebElement)
                 jse.executeScript
                         ("return document.querySelector(\"#\\\\37 7958\").shadowRoot.querySelector(\" td:nth-child(9)\")");
+
         //Из поля Комментарий в параметр String par1
         String comment_output = text2.getText();
 
@@ -140,8 +152,10 @@ public class archiveJournal1 extends MainTest{
     public void RefreshPage(String parameter_1_input) throws InterruptedException{
         System.out.println("шаг 4 перезагрузка страницы");
         JavascriptExecutor jse = (JavascriptExecutor) driver;
+
         //Перезагрузка страницы
         driver.navigate().refresh();
+
         //Ожидание загрузки страницы и элементов
         Thread.sleep(4000);
 
@@ -149,11 +163,13 @@ public class archiveJournal1 extends MainTest{
         WebElement text1 = (WebElement)
                 jse.executeScript
                         ("return document.querySelector(\"#\\\\37 7958\").shadowRoot.querySelector(\" td:nth-child(8)\")");
+
         //Из поля Параметр_1 в параметр String parameter_1
         String parameter_1_output = text1.getText();
 
         //Сравнение
         Assertions.assertEquals(parameter_1_output,parameter_1_input);
+
         //Поиск кнопки "Активность" и клик по ней (кнопка с фиксацией, положение выкл.)
         driver.findElement(activateButton).click();
 
@@ -166,7 +182,6 @@ public class archiveJournal1 extends MainTest{
         System.out.println("шаг 5 скачивание CSV");
         JavascriptExecutor jse = (JavascriptExecutor) driver;
 
-        Thread.sleep(2000);
         WebElement exportButton = (WebElement)
                 jse.executeScript
                         ("return document.querySelector(\"#\\\\37 7958\").shadowRoot.querySelector(\"#toolbar\").shadowRoot.querySelector(\"#toolbar > div.hmi-j-export.btn\")");
