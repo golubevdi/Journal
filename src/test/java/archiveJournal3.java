@@ -443,6 +443,9 @@ public class archiveJournal3 extends MainTest{
         //Из поля в параметр String
         filter_1.click();
         Thread.sleep(5000);
+
+        //кол-во сообщений в журнале
+        //document.querySelector("#\\31 02863").shadowRoot.querySelector("div > div:nth-child(2) > table > tbody").childElementCount
     }
 }
 

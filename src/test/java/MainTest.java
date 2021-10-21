@@ -51,7 +51,7 @@ public class MainTest {
         driver.set(new ChromeDriver());
         //Полноэкранный режим driver.manage().window().maximize();
     }
-
+/*
     @Test
     @DisplayName("Проверка отображения пользовательского параметра тревоги в журнале (русские символы)")
     public void test1() throws InterruptedException {
@@ -115,7 +115,7 @@ public class MainTest {
         aJournal3.on(message_2_input,comment_2_input,full_name_object_2,name_object_2,source_2);
         aJournal3.off(message_2_input,comment_2_input,full_name_object_2,name_object_2,source_2);
     }
-/*
+*/
     @Test
     @DisplayName("Проверка отображения сообщений в журнале после применения фильтров (русские символы)")
     public void test6() throws InterruptedException {
@@ -124,6 +124,7 @@ public class MainTest {
         aJournal3.StartTest();
         aJournal3.filters();
     }
+    /*
     @Test
     @DisplayName("Проверка отображения сообщений в журнале после применения фильтров (английские символы)")
     public void test7() throws InterruptedException {
