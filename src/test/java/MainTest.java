@@ -36,6 +36,8 @@ public class MainTest {
     final String name_object_2 = "Object 2";
     final String source_2 = "Alarm 2";
 
+    final int severity_1 = 1;
+    final int severity_2 = 2;
 
     ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
@@ -96,6 +98,8 @@ public class MainTest {
 
         archiveJournal3 aJournal3 = new archiveJournal3(driver.get());
 
+//Bug 21528: Удаление комментария в архивном сообщении при квитировании с отключенным свойством запрашивать комментарий
+
         aJournal3.StartTest();
         aJournal3.alarm1(message_1_input, comment_1_input);
         aJournal3.acked(message_1_input, comment_1_input, full_name_object_1, name_object_1, source_1);
@@ -107,7 +111,9 @@ public class MainTest {
     @DisplayName("Проверка отображения сообщений в журнале (английские символы)")
     public void test5() throws InterruptedException {
         archiveJournal3 aJournal3 = new archiveJournal3(driver.get());
-        //Bug 21528: Удаление комментария в архивном сообщении при квитировании с отключенным свойством запрашивать комментарий
+
+//Bug 21528: Удаление комментария в архивном сообщении при квитировании с отключенным свойством запрашивать комментарий
+
         aJournal3.StartTest();
         aJournal3.alarm2(message_2_input,comment_2_input);
         aJournal3.acked(message_2_input,comment_2_input,full_name_object_2,name_object_2,source_2);
@@ -116,22 +122,30 @@ public class MainTest {
     }
 
     @Test
-    @DisplayName("Проверка отображения сообщений в журнале после применения фильтров (русские символы)")
+    @DisplayName("Проверка отображения сообщений в журнале после применения фильтров (русские символы) всегда один фильтр")
     public void test6() throws InterruptedException {
         archiveJournal3 aJournal3 = new archiveJournal3(driver.get());
 
         aJournal3.StartTest();
         aJournal3.alarm1(message_1_input, comment_1_input);
-        aJournal3.filter1();
+        aJournal3.filters_severity(severity_1);
+        aJournal3.filters_message(message_1_input);
     }
 
     @Test
-    @DisplayName("Проверка отображения сообщений в журнале после применения фильтров (английские символы)")
+    @DisplayName("Проверка отображения сообщений в журнале после применения фильтров (английские символы) всегда один фильтр")
     public void test7() throws InterruptedException {
         archiveJournal3 aJournal3 = new archiveJournal3(driver.get());
 
         aJournal3.StartTest();
         aJournal3.alarm2(message_2_input,comment_2_input);
-        aJournal3.filter2();
+        aJournal3.filters_severity(severity_2);
+        aJournal3.filters_message(message_2_input);
     }
+/*
+    @Test
+    @DisplayName("Проверка отображения сообщений в журнале после применения фильтров (русские символы) предыдущие фильтры не откл")
+    public void test8() throws InterruptedException {
+
+    }*/
 }

@@ -472,8 +472,8 @@ public class archiveJournal3 extends MainTest{
         Thread.sleep(10000);
     }
 
-    @Step("Включение фильтра Приоритет = 1 и проверка")
-    public void filter1() throws InterruptedException{
+    @Step("Включение фильтра Приоритет и проверка")
+    public void filters_severity(int severity) throws InterruptedException{
         JavascriptExecutor jse = (JavascriptExecutor) driver;
         //Ожидание (загрузка страницы, элементов)
         Thread.sleep(2000);
@@ -486,11 +486,23 @@ public class archiveJournal3 extends MainTest{
 
         //Ожидание
         Thread.sleep(1000);
-        WebElement filter_1 = (WebElement)
+
+
+        if (severity == 1) {
+            WebElement filter_1 = (WebElement)
                 jse.executeScript
                         ("return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"#f_0\")");
-        //Активация фильтра
-        filter_1.click();
+            //Активация фильтра
+            filter_1.click();
+        }
+        else if (severity == 2){
+            WebElement filter_2 = (WebElement)
+                    jse.executeScript
+                            ("return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"#f_1\")");
+            //Активация фильтра
+            filter_2.click();
+        }
+
         Thread.sleep(1000);
 
         //Выход из окна фильтров
@@ -504,7 +516,7 @@ public class archiveJournal3 extends MainTest{
                         ("return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"div > div:nth-child(2) > table > tbody\").childElementCount");
         System.out.println("Кол-во сообщений: " + events_count);
 
-        //Проверка фильтра Приоритет = 1 по всем сообщениям после применения фильтра
+        //Проверка фильтров Приоритет по всем сообщениям после применения фильтра
         while(events_count != 0){
             String num = events_count.toString();
             String doc = "return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"tr:nth-child("
@@ -515,14 +527,44 @@ public class archiveJournal3 extends MainTest{
             System.out.println("Сообщение №" + num + " = "+ message.getText());
 
             //Сравнение приоритета сообщения с 1
-            Assertions.assertEquals(message.getText(), "1");
+            if ((severity == 1)){
+                Assertions.assertEquals(message.getText(), "1");
+            }
+            if ((severity == 2)){
+                Assertions.assertEquals(message.getText(), "2");
+            }
             events_count--;
         }
+
+        //Открытие окна фильтров
+        button_filters.click();
+
+        //Ожидание
+        Thread.sleep(1000);
+
+        if (severity == 1) {
+            WebElement filter_1 = (WebElement)
+                    jse.executeScript
+                            ("return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"#f_0\")");
+            //Активация фильтра
+            filter_1.click();
+        }
+        else if (severity == 2){
+            WebElement filter_2 = (WebElement)
+                    jse.executeScript
+                            ("return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"#f_1\")");
+            //Активация фильтра
+            filter_2.click();
+        }
+
+        //Закрытие окна фильтров
+        button_filters.click();
+
         Thread.sleep(5000);
     }
 
-    @Step("Включение фильтра Приоритет = 2 и проверка")
-    public void filter2() throws InterruptedException{
+    @Step("Включение фильтра Сообщение и проверка")
+    public void filters_message(String message) throws InterruptedException{
         JavascriptExecutor jse = (JavascriptExecutor) driver;
 
         //Ожидание (загрузка страницы, элементов)
@@ -536,11 +578,22 @@ public class archiveJournal3 extends MainTest{
 
         //Ожидание
         Thread.sleep(1000);
-        WebElement filter_2 = (WebElement)
-                jse.executeScript
-                        ("return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"#f_1\")");
-        //Активация фильтра
-        filter_2.click();
+
+        if (message.equals("сообщение")) {
+            WebElement filters_message = (WebElement)
+                    jse.executeScript
+                            ("return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"#f_2\")");
+            //Активация фильтра
+            filters_message.click();
+        }
+        else if (message.equals("message")) {
+            WebElement filters_message = (WebElement)
+                    jse.executeScript
+                            ("return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"#f_3\")");
+            //Активация фильтра
+            filters_message.click();
+        }
+
         Thread.sleep(1000);
 
         //Выход из окна фильтров
@@ -554,21 +607,53 @@ public class archiveJournal3 extends MainTest{
                         ("return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"div > div:nth-child(2) > table > tbody\").childElementCount");
         System.out.println("Кол-во сообщений: " + events_count);
 
-        //Проверка фильтра Приоритет = 2 по всем сообщениям после применения фильтра
+        //Проверка фильтров Сообщение по всем сообщениям после применения фильтра
         while(events_count != 0){
             String num = events_count.toString();
             String doc = "return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"tr:nth-child("
-                    + num + ") > td:nth-child(5)\")";
-            WebElement message = (WebElement)
+                    + num + ") > td:nth-child(7)\")";
+            WebElement f_message = (WebElement)
                     jse.executeScript
                             (doc);
-            System.out.println("Сообщение №" + num + " = "+ message.getText());
+            System.out.println("Сообщение №" + num + " = "+ f_message.getText());
 
-            //Сравнение приоритета сообщения с 2
-            Assertions.assertEquals(message.getText(), "2");
+            //Сравнение сообщения
+            if (message.equals("сообщение")){
+                Assertions.assertEquals(f_message.getText(), "сообщение");
+            }
+            else if (message.equals("message")) {
+                Assertions.assertEquals(f_message.getText(), "message");
+            }
             events_count--;
         }
+
+        //Открытие окна фильтров
+        button_filters.click();
+
+        //Ожидание
+        Thread.sleep(1000);
+
+        if (message.equals("сообщение")) {
+            WebElement filters_message = (WebElement)
+                    jse.executeScript
+                            ("return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"#f_2\")");
+            //Активация фильтра
+            filters_message.click();
+        }
+        else if (message.equals("message")) {
+            WebElement filters_message = (WebElement)
+                    jse.executeScript
+                            ("return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"#f_3\")");
+            //Активация фильтра
+            filters_message.click();
+        }
+
+        //Закрытие окна фильтров
+        button_filters.click();
+
         Thread.sleep(5000);
     }
+
+
 }
 
