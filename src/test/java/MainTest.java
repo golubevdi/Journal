@@ -107,7 +107,7 @@ public class MainTest {
     @DisplayName("Проверка отображения сообщений в журнале (английские символы)")
     public void test5() throws InterruptedException {
         archiveJournal3 aJournal3 = new archiveJournal3(driver.get());
-
+        //Bug 21528: Удаление комментария в архивном сообщении при квитировании с отключенным свойством запрашивать комментарий
         aJournal3.StartTest();
         aJournal3.alarm2(message_2_input,comment_2_input);
         aJournal3.acked(message_2_input,comment_2_input,full_name_object_2,name_object_2,source_2);
