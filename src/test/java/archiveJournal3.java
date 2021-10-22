@@ -505,7 +505,7 @@ public class archiveJournal3 extends MainTest{
         System.out.println("Кол-во сообщений: " + events_count);
 
         //Проверка фильтра Приоритет = 1 по всем сообщениям после применения фильтра
-        while(events_count!=0){
+        while(events_count != 0){
             String num = events_count.toString();
             String doc = "return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"tr:nth-child("
                     + num + ") > td:nth-child(5)\")";
@@ -555,7 +555,7 @@ public class archiveJournal3 extends MainTest{
         System.out.println("Кол-во сообщений: " + events_count);
 
         //Проверка фильтра Приоритет = 2 по всем сообщениям после применения фильтра
-        while(events_count!=0){
+        while(events_count != 0){
             String num = events_count.toString();
             String doc = "return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"tr:nth-child("
                     + num + ") > td:nth-child(5)\")";
