@@ -167,7 +167,7 @@ public class MainTest {
     @Test
     @DisplayName("Проверка отображения сообщений в журнале после применения фильтров (русские символы) предыдущие фильтры не откл")
     public void test8() throws InterruptedException {
-
     }
-*/
+
+ */
 }

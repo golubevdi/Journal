@@ -122,8 +122,6 @@ public class archiveJournal2 extends MainTest{
         String col_activ = color_message_active.getAttribute("style");
         System.out.println("цвет события появление тревоги 1: "+col_activ);
 
-        //Ожидание
-        Thread.sleep(2000);
 
         //Поиск цвета у события "Исчезновение" Тревоги 1
         WebElement color_message_deactiv = (WebElement)
@@ -160,6 +158,6 @@ public class archiveJournal2 extends MainTest{
         Assertions.assertEquals(color_deact_2, col_deact_2);
         Assertions.assertEquals(color_act_2, col_activ_2);
         //Ожидание перед закрытием
-        Thread.sleep(10000);
+        Thread.sleep(2000);
     }
 }

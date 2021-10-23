@@ -51,7 +51,7 @@ public class archiveJournal1 extends MainTest{
         driver.findElement(dischargeButton).click();
 
         //Ожидание совершения действия
-        Thread.sleep(2000);
+        Thread.sleep(1000);
 
         //Проверка нажата ли кнопка(если нажата, то отжать)
         WebElement search_button_act1 = (WebElement)
@@ -65,7 +65,7 @@ public class archiveJournal1 extends MainTest{
         if (aClass1.equals("tbmain button active")){
             driver.findElement(activateButton).click();
         }
-        Thread.sleep(2000);
+        Thread.sleep(1000);
 
         //Поиск элемента "Текстовый ввод" и задание ему значения "-k"
         driver.findElement(textInput).sendKeys(parameter_1_input);
@@ -74,7 +74,7 @@ public class archiveJournal1 extends MainTest{
         driver.findElement(activateButton).click();
 
         //Ожидание появления сообщения в Архивном журнале
-        Thread.sleep(2000);
+        Thread.sleep(1000);
 
         //Поиск поля пользовательского параметра в журнале и получения из него значения
         WebElement text1 = (WebElement)
@@ -174,7 +174,7 @@ public class archiveJournal1 extends MainTest{
         driver.findElement(activateButton).click();
 
         //Ожидание перед закрытием
-        Thread.sleep(2000);
+        Thread.sleep(1000);
     }
 
     @Step("Проверка пользовательского параметра в последней строчке CSV-файла")
@@ -186,7 +186,7 @@ public class archiveJournal1 extends MainTest{
                 jse.executeScript
                         ("return document.querySelector(\"#\\\\37 7958\").shadowRoot.querySelector(\"#toolbar\").shadowRoot.querySelector(\"#toolbar > div.hmi-j-export.btn\")");
         exportButton.click();
-        Thread.sleep(3000);
+        Thread.sleep(2000);
         BufferedReader br = null;
         String out ="";
 

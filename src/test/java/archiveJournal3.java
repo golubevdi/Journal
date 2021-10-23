@@ -105,7 +105,6 @@ public class archiveJournal3 extends MainTest{
         search_button1.click();
         Thread.sleep(2000);
 
-        Thread.sleep(2000);
         //Поиск кнопки "Активность" Тревоги 1 и клик по ней (кнопка с фиксацией, положение выкл.)
         driver.findElement(activateButton1).click();
         Thread.sleep(2000);
@@ -203,7 +202,7 @@ public class archiveJournal3 extends MainTest{
         Assertions.assertEquals(source,sourceAckText1);
 
         //Ожидание
-        Thread.sleep(5000);
+        Thread.sleep(2000);
     }
 
     @Step("Проверка столбцов журнала у события появление Тревоги")
@@ -294,7 +293,7 @@ public class archiveJournal3 extends MainTest{
         Assertions.assertEquals(source,sourceOnText1);
 
         //Ожидание
-        Thread.sleep(5000);
+        Thread.sleep(2000);
     }
 
     @Step("Проверка столбцов журнала у события исчезновение Тревоги")
@@ -387,7 +386,7 @@ public class archiveJournal3 extends MainTest{
         Assertions.assertEquals(source,sourceOffText1);
 
         //Ожидание
-        Thread.sleep(5000);
+        Thread.sleep(2000);
     }
 
     @Step("Активация, квитирование и деактивация Тревоги 2")
@@ -449,7 +448,7 @@ public class archiveJournal3 extends MainTest{
         Thread.sleep(1000);
 
         search_button_inc_up_2.click();
-        Thread.sleep(2000);
+        Thread.sleep(1000);
 
         //Поиск кнопки "Активность" Тревоги 1 и клик по ней (кнопка с фиксацией, положение вкл.)
         driver.findElement(activateButton2).click();
@@ -470,7 +469,7 @@ public class archiveJournal3 extends MainTest{
         //Поиск кнопки "Активность" Тревоги 1 и клик по ней (кнопка с фиксацией, положение выкл.)
         driver.findElement(activateButton2).click();
 
-        Thread.sleep(10000);
+        Thread.sleep(2000);
     }
 
     @Step("Включение фильтра Приоритет и проверка")
@@ -561,7 +560,7 @@ public class archiveJournal3 extends MainTest{
         //Закрытие окна фильтров
         button_filters.click();
 
-        Thread.sleep(5000);
+        Thread.sleep(2000);
     }
 
     @Step("Включение фильтра Сообщение и проверка")
@@ -600,7 +599,7 @@ public class archiveJournal3 extends MainTest{
         //Выход из окна фильтров
         button_filters.click();
 
-        Thread.sleep(2000);
+        Thread.sleep(1000);
 
         //кол-во сообщений в журнале
         Long events_count = (Long)
@@ -652,7 +651,7 @@ public class archiveJournal3 extends MainTest{
         //Закрытие окна фильтров
         button_filters.click();
 
-        Thread.sleep(5000);
+        Thread.sleep(2000);
     }
 
     @Step("Включение фильтра Объект и проверка")
@@ -691,7 +690,7 @@ public class archiveJournal3 extends MainTest{
         //Выход из окна фильтров
         button_filters.click();
 
-        Thread.sleep(2000);
+        Thread.sleep(1000);
 
         //кол-во сообщений в журнале
         Long events_count = (Long)
@@ -743,7 +742,7 @@ public class archiveJournal3 extends MainTest{
         //Закрытие окна фильтров
         button_filters.click();
 
-        Thread.sleep(5000);
+        Thread.sleep(2000);
     }
 
     @Step("Включение фильтра Полное имя Объекта и проверка")
@@ -782,7 +781,7 @@ public class archiveJournal3 extends MainTest{
         //Выход из окна фильтров
         button_filters.click();
 
-        Thread.sleep(2000);
+        Thread.sleep(1000);
 
         //кол-во сообщений в журнале
         Long events_count = (Long)
@@ -834,7 +833,7 @@ public class archiveJournal3 extends MainTest{
         //Закрытие окна фильтров
         button_filters.click();
 
-        Thread.sleep(5000);
+        Thread.sleep(2000);
     }
     @Step("Включение фильтра Источник и проверка")
     public void filters_source(String source) throws InterruptedException{
@@ -872,7 +871,7 @@ public class archiveJournal3 extends MainTest{
         //Выход из окна фильтров
         button_filters.click();
 
-        Thread.sleep(2000);
+        Thread.sleep(1000);
 
         //кол-во сообщений в журнале
         Long events_count = (Long)
@@ -924,7 +923,7 @@ public class archiveJournal3 extends MainTest{
         //Закрытие окна фильтров
         button_filters.click();
 
-        Thread.sleep(5000);
+        Thread.sleep(2000);
     }
 
     @Step("Включение фильтра Комментарий и проверка")
@@ -963,7 +962,7 @@ public class archiveJournal3 extends MainTest{
         //Выход из окна фильтров
         button_filters.click();
 
-        Thread.sleep(2000);
+        Thread.sleep(1000);
 
         //кол-во сообщений в журнале
         Long events_count = (Long)
@@ -1015,7 +1014,7 @@ public class archiveJournal3 extends MainTest{
         //Закрытие окна фильтров
         button_filters.click();
 
-        Thread.sleep(5000);
+        Thread.sleep(2000);
     }
 
 }
