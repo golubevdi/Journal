@@ -36,6 +36,7 @@ public class MainTest {
     final String name_object_2 = "Object 2";
     final String source_2 = "Alarm 2";
 
+    //Параметр для проверки теста 5
     final int severity_1 = 1;
     final int severity_2 = 2;
 
@@ -101,6 +102,7 @@ public class MainTest {
 //Bug 21528: Удаление комментария в архивном сообщении при квитировании с отключенным свойством запрашивать комментарий
 
         aJournal3.StartTest();
+        aJournal3.test3page();
         aJournal3.alarm1(message_1_input, comment_1_input);
         aJournal3.acked(message_1_input, comment_1_input, full_name_object_1, name_object_1, source_1);
         aJournal3.on(message_1_input, comment_1_input, full_name_object_1, name_object_1, source_1);
@@ -115,6 +117,7 @@ public class MainTest {
 //Bug 21528: Удаление комментария в архивном сообщении при квитировании с отключенным свойством запрашивать комментарий
 
         aJournal3.StartTest();
+        aJournal3.test3page();
         aJournal3.alarm2(message_2_input,comment_2_input);
         aJournal3.acked(message_2_input,comment_2_input,full_name_object_2,name_object_2,source_2);
         aJournal3.on(message_2_input,comment_2_input,full_name_object_2,name_object_2,source_2);
@@ -127,9 +130,18 @@ public class MainTest {
         archiveJournal3 aJournal3 = new archiveJournal3(driver.get());
 
         aJournal3.StartTest();
+        aJournal3.test3page();
         aJournal3.alarm1(message_1_input, comment_1_input);
+        aJournal3.alarm2(message_2_input,comment_2_input);
         aJournal3.filters_severity(severity_1);
         aJournal3.filters_message(message_1_input);
+        aJournal3.filters_object(name_object_1);
+        aJournal3.filters_full_name_object(full_name_object_1);
+        aJournal3.filters_source(source_1);
+
+        //Bug 21528: Удаление комментария в архивном сообщении при квитировании с отключенным свойством запрашивать комментарий
+
+        //aJournal3.filters_comment(comment_1_input);
     }
 
     @Test
@@ -138,14 +150,24 @@ public class MainTest {
         archiveJournal3 aJournal3 = new archiveJournal3(driver.get());
 
         aJournal3.StartTest();
+        aJournal3.test3page();
+        aJournal3.alarm1(message_1_input, comment_1_input);
         aJournal3.alarm2(message_2_input,comment_2_input);
         aJournal3.filters_severity(severity_2);
         aJournal3.filters_message(message_2_input);
+        aJournal3.filters_object(name_object_2);
+        aJournal3.filters_full_name_object(full_name_object_2);
+        aJournal3.filters_source(source_2);
+
+        //Bug 21528: Удаление комментария в архивном сообщении при квитировании с отключенным свойством запрашивать комментарий
+
+        //aJournal3.filters_comment(comment_2_input);
     }
 /*
     @Test
     @DisplayName("Проверка отображения сообщений в журнале после применения фильтров (русские символы) предыдущие фильтры не откл")
     public void test8() throws InterruptedException {
 
-    }*/
+    }
+*/
 }

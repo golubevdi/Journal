@@ -28,15 +28,18 @@ public class archiveJournal3 extends MainTest{
         this.driver.get(Base_URL);
     }
 
+    @Step("Переход на станицу Тест 3")
+    public void test3page() throws InterruptedException {
+        Thread.sleep(2000);
+        //Поиск кнопки с переходом на окно теста 2
+        driver.findElement(test3Button).click();
+        //Ожидание (загрузка страницы, элементов)
+        Thread.sleep(2000);
+    }
+
     @Step("Активация, квитирование и деактивация Тревоги 1")
     public void alarm1(String message_1_input, String comment_1_input) throws InterruptedException {
         JavascriptExecutor jse = (JavascriptExecutor) driver;
-
-        //Ожидание (загрузка страницы, элементов)
-        Thread.sleep(2000);
-
-        //Поиск кнопки с переходом на окно теста 2
-        driver.findElement(test3Button).click();
 
         //Ожидание (загрузка страницы, элементов)
         Thread.sleep(2000);
@@ -392,11 +395,9 @@ public class archiveJournal3 extends MainTest{
         JavascriptExecutor jse = (JavascriptExecutor) driver;
         //Ожидание (загрузка страницы, элементов)
         Thread.sleep(2000);
-        //Поиск кнопки с переходом на окно теста 2
-        driver.findElement(test3Button).click();
-        //Ожидание (загрузка страницы, элементов)
-        Thread.sleep(2000);
+
         //Проверка нажата ли кнопка(если нажата, то отжать), для Тревоги 2
+
         WebElement search_button_act2 = (WebElement)
                 jse.executeScript
                         ("return document.querySelector(\"#\\\\31 03575\").shadowRoot.querySelector(\"div[class]\")");
@@ -654,6 +655,367 @@ public class archiveJournal3 extends MainTest{
         Thread.sleep(5000);
     }
 
+    @Step("Включение фильтра Объект и проверка")
+    public void filters_object(String object) throws InterruptedException{
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
+
+        //Ожидание (загрузка страницы, элементов)
+        Thread.sleep(2000);
+
+        //Вход в окно фильтров
+        WebElement button_filters = (WebElement)
+                jse.executeScript
+                        ("return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"#toolbar\").shadowRoot.querySelector(\"#toolbar > div.btn.hmi-j-filter\")");
+        button_filters.click();
+
+        //Ожидание
+        Thread.sleep(1000);
+
+        if (object.equals("Объект 1")) {
+            WebElement filters_message = (WebElement)
+                    jse.executeScript
+                            ("return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"#f_4\")");
+            //Активация фильтра
+            filters_message.click();
+        }
+        else if (object.equals("Object 2")) {
+            WebElement filters_message = (WebElement)
+                    jse.executeScript
+                            ("return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"#f_5\")");
+            //Активация фильтра
+            filters_message.click();
+        }
+
+        Thread.sleep(1000);
+
+        //Выход из окна фильтров
+        button_filters.click();
+
+        Thread.sleep(2000);
+
+        //кол-во сообщений в журнале
+        Long events_count = (Long)
+                jse.executeScript
+                        ("return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"div > div:nth-child(2) > table > tbody\").childElementCount");
+        System.out.println("Кол-во сообщений: " + events_count);
+
+        //Проверка фильтров Объект по всем сообщениям после применения фильтра
+        while(events_count != 0){
+            String num = events_count.toString();
+            String doc = "return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"tr:nth-child("
+                    + num + ") > td:nth-child(10)\")";
+            WebElement f_message = (WebElement)
+                    jse.executeScript
+                            (doc);
+            System.out.println("Сообщение №" + num + " = "+ f_message.getText());
+
+            //Сравнение сообщения
+            if (object.equals("Объект 1")){
+                Assertions.assertEquals(f_message.getText(), "Объект 1");
+            }
+            else if (object.equals("Object 2")) {
+                Assertions.assertEquals(f_message.getText(), "Object 2");
+            }
+            events_count--;
+        }
+
+        //Открытие окна фильтров
+        button_filters.click();
+
+        //Ожидание
+        Thread.sleep(1000);
+
+        if (object.equals("Объект 1")) {
+            WebElement filters_message = (WebElement)
+                    jse.executeScript
+                            ("return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"#f_4\")");
+            //Активация фильтра
+            filters_message.click();
+        }
+        else if (object.equals("Object 2")) {
+            WebElement filters_message = (WebElement)
+                    jse.executeScript
+                            ("return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"#f_5\")");
+            //Активация фильтра
+            filters_message.click();
+        }
+
+        //Закрытие окна фильтров
+        button_filters.click();
+
+        Thread.sleep(5000);
+    }
+
+    @Step("Включение фильтра Полное имя Объекта и проверка")
+    public void filters_full_name_object(String full_name_object) throws InterruptedException{
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
+
+        //Ожидание (загрузка страницы, элементов)
+        Thread.sleep(2000);
+
+        //Вход в окно фильтров
+        WebElement button_filters = (WebElement)
+                jse.executeScript
+                        ("return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"#toolbar\").shadowRoot.querySelector(\"#toolbar > div.btn.hmi-j-filter\")");
+        button_filters.click();
+
+        //Ожидание
+        Thread.sleep(1000);
+
+        if (full_name_object.equals("Объекты.Test 3.Объект 1")) {
+            WebElement filters_message = (WebElement)
+                    jse.executeScript
+                            ("return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"#f_6\")");
+            //Активация фильтра
+            filters_message.click();
+        }
+        else if (full_name_object.equals("Объекты.Test 3.Object 2")) {
+            WebElement filters_message = (WebElement)
+                    jse.executeScript
+                            ("return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"#f_7\")");
+            //Активация фильтра
+            filters_message.click();
+        }
+
+        Thread.sleep(1000);
+
+        //Выход из окна фильтров
+        button_filters.click();
+
+        Thread.sleep(2000);
+
+        //кол-во сообщений в журнале
+        Long events_count = (Long)
+                jse.executeScript
+                        ("return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"div > div:nth-child(2) > table > tbody\").childElementCount");
+        System.out.println("Кол-во сообщений: " + events_count);
+
+        //Проверка фильтров Объект по всем сообщениям после применения фильтра
+        while(events_count != 0){
+            String num = events_count.toString();
+            String doc = "return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"tr:nth-child("
+                    + num + ") > td:nth-child(9)\")";
+            WebElement f_message = (WebElement)
+                    jse.executeScript
+                            (doc);
+            System.out.println("Сообщение №" + num + " = "+ f_message.getText());
+
+            //Сравнение сообщения
+            if (full_name_object.equals("Объекты.Test 3.Объект 1")){
+                Assertions.assertEquals(f_message.getText(), "Объекты.Test 3.Объект 1");
+            }
+            else if (full_name_object.equals("Объекты.Test 3.Object 2")) {
+                Assertions.assertEquals(f_message.getText(), "Объекты.Test 3.Object 2");
+            }
+            events_count--;
+        }
+
+        //Открытие окна фильтров
+        button_filters.click();
+
+        //Ожидание
+        Thread.sleep(1000);
+
+        if (full_name_object.equals("Объекты.Test 3.Объект 1")) {
+            WebElement filters_message = (WebElement)
+                    jse.executeScript
+                            ("return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"#f_6\")");
+            //Активация фильтра
+            filters_message.click();
+        }
+        else if (full_name_object.equals("Объекты.Test 3.Object 2")) {
+            WebElement filters_message = (WebElement)
+                    jse.executeScript
+                            ("return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"#f_7\")");
+            //Активация фильтра
+            filters_message.click();
+        }
+
+        //Закрытие окна фильтров
+        button_filters.click();
+
+        Thread.sleep(5000);
+    }
+    @Step("Включение фильтра Источник и проверка")
+    public void filters_source(String source) throws InterruptedException{
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
+
+        //Ожидание (загрузка страницы, элементов)
+        Thread.sleep(2000);
+
+        //Вход в окно фильтров
+        WebElement button_filters = (WebElement)
+                jse.executeScript
+                        ("return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"#toolbar\").shadowRoot.querySelector(\"#toolbar > div.btn.hmi-j-filter\")");
+        button_filters.click();
+
+        //Ожидание
+        Thread.sleep(1000);
+
+        if (source.equals("Тревога 1")) {
+            WebElement filters_message = (WebElement)
+                    jse.executeScript
+                            ("return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"#f_8\")");
+            //Активация фильтра
+            filters_message.click();
+        }
+        else if (source.equals("Alarm 2")) {
+            WebElement filters_message = (WebElement)
+                    jse.executeScript
+                            ("return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"#f_9\")");
+            //Активация фильтра
+            filters_message.click();
+        }
+
+        Thread.sleep(1000);
+
+        //Выход из окна фильтров
+        button_filters.click();
+
+        Thread.sleep(2000);
+
+        //кол-во сообщений в журнале
+        Long events_count = (Long)
+                jse.executeScript
+                        ("return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"div > div:nth-child(2) > table > tbody\").childElementCount");
+        System.out.println("Кол-во сообщений: " + events_count);
+
+        //Проверка фильтров Объект по всем сообщениям после применения фильтра
+        while(events_count != 0){
+            String num = events_count.toString();
+            String doc = "return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"tr:nth-child("
+                    + num + ") > td:nth-child(11)\")";
+            WebElement f_message = (WebElement)
+                    jse.executeScript
+                            (doc);
+            System.out.println("Сообщение №" + num + " = "+ f_message.getText());
+
+            //Сравнение сообщения
+            if (source.equals("Тревога 1")){
+                Assertions.assertEquals(f_message.getText(), "Тревога 1");
+            }
+            else if (source.equals("Alarm 2")) {
+                Assertions.assertEquals(f_message.getText(), "Alarm 2");
+            }
+            events_count--;
+        }
+
+        //Открытие окна фильтров
+        button_filters.click();
+
+        //Ожидание
+        Thread.sleep(1000);
+
+        if (source.equals("Тревога 1")) {
+            WebElement filters_message = (WebElement)
+                    jse.executeScript
+                            ("return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"#f_8\")");
+            //Активация фильтра
+            filters_message.click();
+        }
+        else if (source.equals("Alarm 2")) {
+            WebElement filters_message = (WebElement)
+                    jse.executeScript
+                            ("return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"#f_9\")");
+            //Активация фильтра
+            filters_message.click();
+        }
+
+        //Закрытие окна фильтров
+        button_filters.click();
+
+        Thread.sleep(5000);
+    }
+
+    @Step("Включение фильтра Комментарий и проверка")
+    public void filters_comment(String comment) throws InterruptedException{
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
+
+        //Ожидание (загрузка страницы, элементов)
+        Thread.sleep(2000);
+
+        //Вход в окно фильтров
+        WebElement button_filters = (WebElement)
+                jse.executeScript
+                        ("return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"#toolbar\").shadowRoot.querySelector(\"#toolbar > div.btn.hmi-j-filter\")");
+        button_filters.click();
+
+        //Ожидание
+        Thread.sleep(1000);
+
+        if (comment.equals("комментарий")) {
+            WebElement filters_message = (WebElement)
+                    jse.executeScript
+                            ("return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"#f_10\")");
+            //Активация фильтра
+            filters_message.click();
+        }
+        else if (comment.equals("comment")) {
+            WebElement filters_message = (WebElement)
+                    jse.executeScript
+                            ("return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"#f_11\")");
+            //Активация фильтра
+            filters_message.click();
+        }
+
+        Thread.sleep(1000);
+
+        //Выход из окна фильтров
+        button_filters.click();
+
+        Thread.sleep(2000);
+
+        //кол-во сообщений в журнале
+        Long events_count = (Long)
+                jse.executeScript
+                        ("return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"div > div:nth-child(2) > table > tbody\").childElementCount");
+        System.out.println("Кол-во сообщений: " + events_count);
+
+        //Проверка фильтров Объект по всем сообщениям после применения фильтра
+        while(events_count != 0){
+            String num = events_count.toString();
+            String doc = "return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"tr:nth-child("
+                    + num + ") > td:nth-child(7)\")";
+            WebElement f_message = (WebElement)
+                    jse.executeScript
+                            (doc);
+            System.out.println("Сообщение №" + num + " = "+ f_message.getText());
+
+            //Сравнение сообщения
+            if (comment.equals("комментарий")){
+                Assertions.assertEquals(f_message.getText(), "комментарий");
+            }
+            else if (comment.equals("comment")) {
+                Assertions.assertEquals(f_message.getText(), "comment");
+            }
+            events_count--;
+        }
+
+        //Открытие окна фильтров
+        button_filters.click();
+
+        //Ожидание
+        Thread.sleep(1000);
+
+        if (comment.equals("комментарий")) {
+            WebElement filters_message = (WebElement)
+                    jse.executeScript
+                            ("return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"#f_10\")");
+            //Активация фильтра
+            filters_message.click();
+        }
+        else if (comment.equals("comment")) {
+            WebElement filters_message = (WebElement)
+                    jse.executeScript
+                            ("return document.querySelector(\"#\\\\31 02863\").shadowRoot.querySelector(\"#f_11\")");
+            //Активация фильтра
+            filters_message.click();
+        }
+
+        //Закрытие окна фильтров
+        button_filters.click();
+
+        Thread.sleep(5000);
+    }
 
 }
-
