@@ -164,4 +164,25 @@ public class MainTest {
         //aJournal3.filters_comment(comment_2_input);
         //"Проверка отображения сообщений в журнале после применения фильтров (русские символы) предыдущие фильтры не откл")
     }
+    @Test
+    @DisplayName("Проверка фильтров RT")
+    public void test8() throws InterruptedException {
+        archiveJournal4 aJournal4 = new archiveJournal4(driver.get());
+
+        aJournal4.StartTest();
+        aJournal4.test4page();
+        aJournal4.alarms();
+    }
+
+
+    @Test
+    @DisplayName("Проверка автопрокрутки")
+    public void test9() throws InterruptedException {
+        archiveJournal5 aJournal5 = new archiveJournal5(driver.get());
+
+        aJournal5.StartTest();
+        aJournal5.test5page();
+        aJournal5.alarmsActivation();
+        aJournal5.autoprokrutka();
+    }
 }

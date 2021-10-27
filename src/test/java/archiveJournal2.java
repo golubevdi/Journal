@@ -16,9 +16,10 @@ public class archiveJournal2 extends MainTest{
         this.driver = driver;
     }
 
-    @Step("Начало. Переход на страницу для теста")
+    @Step("Начало. Запуск браузера")
     public void StartTest(){
         System.out.println("шаг 1 запуск браузера");
+        System.out.println("-------------------------------------------------------");
         String Base_URL = "http://127.0.0.1:8043";
         this.driver.get(Base_URL);
     }

@@ -20,7 +20,7 @@ public class archiveJournal3 extends MainTest{
         this.driver = driver;
     }
 
-    @Step("Начало. Переход на страницу для теста")
+    @Step("Начало. Запуск браузера")
     public void StartTest(){
         System.out.println("шаг 1 запуск браузера");
         System.out.println("-------------------------------------------------------");
@@ -31,7 +31,7 @@ public class archiveJournal3 extends MainTest{
     @Step("Переход на станицу Тест 3")
     public void test3page() throws InterruptedException {
         Thread.sleep(2000);
-        //Поиск кнопки с переходом на окно теста 2
+        //Поиск кнопки с переходом на окно теста 3
         driver.findElement(test3Button).click();
         //Ожидание (загрузка страницы, элементов)
         Thread.sleep(2000);
@@ -486,7 +486,6 @@ public class archiveJournal3 extends MainTest{
 
         //Ожидание
         Thread.sleep(1000);
-
 
         if (severity == 1) {
             WebElement filter_1 = (WebElement)

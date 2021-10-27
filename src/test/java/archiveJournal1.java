@@ -25,9 +25,10 @@ public class archiveJournal1 extends MainTest{
         this.driver = driver;
     }
 
-    @Step("Начало. Переход на страницу для теста")
+    @Step("Начало. Запуск браузера")
     public void StartTest(){
         System.out.println("шаг 1 запуск браузера");
+        System.out.println("-------------------------------------------------------");
         String Base_URL = "http://127.0.0.1:8043";
         this.driver.get(Base_URL);
     }
@@ -36,6 +37,8 @@ public class archiveJournal1 extends MainTest{
     public void ActivateMessage(String parameter_1_input)throws InterruptedException{
 
         System.out.println("шаг 2 переход на страницу теста и активация сообщения");
+        System.out.println("-------------------------------------------------------");
+
         JavascriptExecutor jse = (JavascriptExecutor) driver;
 
         //Ожидание (загрузка страницы, элементов)
@@ -91,6 +94,8 @@ public class archiveJournal1 extends MainTest{
     @Step("Проверка поля пользовательского параметра после квитирования")
     public void AckedMessage(String parameter_1_input, String comment_input) throws InterruptedException{
         System.out.println("шаг 3 квитирование");
+        System.out.println("-------------------------------------------------------");
+
         JavascriptExecutor jse = (JavascriptExecutor) driver;
 
         //Поиск кнопки "квит" у последнего появившегося сообщения в архивном журнале
@@ -151,6 +156,8 @@ public class archiveJournal1 extends MainTest{
     @Step("Проверка поля пользовательского параметра после перезагрузки клиента")
     public void RefreshPage(String parameter_1_input) throws InterruptedException{
         System.out.println("шаг 4 перезагрузка страницы");
+        System.out.println("-------------------------------------------------------");
+
         JavascriptExecutor jse = (JavascriptExecutor) driver;
 
         //Перезагрузка страницы
@@ -180,6 +187,8 @@ public class archiveJournal1 extends MainTest{
     @Step("Проверка пользовательского параметра в последней строчке CSV-файла")
     public void fileCSV(String parameter_1_input, String comment_input) throws InterruptedException{
         System.out.println("шаг 5 скачивание CSV");
+        System.out.println("-------------------------------------------------------");
+
         JavascriptExecutor jse = (JavascriptExecutor) driver;
 
         WebElement exportButton = (WebElement)
