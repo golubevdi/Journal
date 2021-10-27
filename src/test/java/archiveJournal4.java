@@ -349,6 +349,7 @@ public class archiveJournal4 extends MainTest{
                 jse.executeScript
                         (doc);
         System.out.println("время: " + message.getText());
+        String HH_message = message.getText();
 
         //Включение фильтра
         WebElement timeRT_button = (WebElement)
@@ -362,11 +363,35 @@ public class archiveJournal4 extends MainTest{
                         ("return document.querySelector(\"#\\\\31 28860\").shadowRoot.querySelector(\"#left\").shadowRoot.querySelector(\"#btnCal\")");
         timeRT_button_calendar.click();
 
-        String HH = (String)
+        String HH_filter = (String)
                 jse.executeScript
                         ("return document.querySelector(\"#HH\").value");
-        System.out.println("часы: " + HH);
+        System.out.println("часы: " + HH_filter);
+        System.out.println("часы: " + HH_message.substring(11, 13));
+        String HH_message_hh = HH_message.substring(11, 13);
 
+        //Установка часов (HH) в фильтре
+        int hh_f = Integer.parseInt(HH_filter);
+        int hh_m = Integer.parseInt(HH_message_hh);
+
+        while (hh_f != hh_m){
+            if (hh_f < hh_m){
+                WebElement HH_up = (WebElement)
+                        jse.executeScript
+                                ("return document.querySelector(\"#calend > div > div:nth-child(2) > div:nth-child(1) > #up\")");
+                HH_up.click();
+            }/*
+            else if (hh_f > hh_m){
+                WebElement HH_down = (WebElement)
+                        jse.executeScript
+                                ("return document.querySelector(\"#calend > div > div:nth-child(2) > div:nth-child(1) > #down\")");
+                HH_down.click();
+            }*/
+            HH_filter = (String)
+                    jse.executeScript
+                            ("return document.querySelector(\"#HH\").value");
+            hh_f = Integer.parseInt(HH_filter);
+        }
 
         /*
         String s1 = message.getText();
@@ -378,8 +403,6 @@ public class archiveJournal4 extends MainTest{
         //begin_time.sendKeys("\b");
         //begin_time.sendKeys(Keys.ARROW_LEFT);
         //begin_time.sendKeys(s1);
-
-
 
         Thread.sleep(10000);
 

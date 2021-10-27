@@ -43,7 +43,7 @@ public class archiveJournal5 extends MainTest{
         Thread.sleep(2000);
     }
     @Step("Автопрокрутка")
-    public void autoprokrutka() throws InterruptedException{
+    public void auto() throws InterruptedException{
         System.out.println("шаг 3 включения автопрокрутки в верхнем положении скроллбара");
         System.out.println("-------------------------------------------------------");
 
@@ -80,7 +80,7 @@ public class archiveJournal5 extends MainTest{
         //Переход к первой странице
         WebElement first_page = (WebElement)
                 jse.executeScript
-                        ("return document.querySelector(\"#\\\\31 30459\").shadowRoot.querySelector(\"#toolbar\").shadowRoot.querySelector(\"#toolbar > div.hmi-j-step-up.btn\")");
+                        ("return document.querySelector(\"#\\\\31 30459\").shadowRoot.querySelector(\"#toolbar\").shadowRoot.querySelector(\"#toolbar > div:nth-child(13)\")");
         first_page.click();
         Thread.sleep(2000);
 

@@ -24,7 +24,7 @@ public class ScreenshotExt implements TestWatcher {
                 "Screenshot","image/png", "png",((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES)
         );
         try {
-            getDriver(context).close();
+            getDriver(context).quit();
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
         }
@@ -33,7 +33,7 @@ public class ScreenshotExt implements TestWatcher {
     @Override
     public void testDisabled(ExtensionContext context, Optional<String> reason){
         try {
-            getDriver(context).close();
+            getDriver(context).quit();
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
         }
@@ -42,7 +42,7 @@ public class ScreenshotExt implements TestWatcher {
     @Override
     public void testSuccessful(ExtensionContext context){
         try {
-            getDriver(context).close();
+            getDriver(context).quit();
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
         }
@@ -51,7 +51,7 @@ public class ScreenshotExt implements TestWatcher {
     @Override
     public void testAborted(ExtensionContext context, Throwable cause){
         try {
-            getDriver(context).close();
+            getDriver(context).quit();
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
         }
@@ -64,7 +64,7 @@ public class ScreenshotExt implements TestWatcher {
             Field field = instance.getClass().getDeclaredField("driver");
             field.setAccessible(true);
             return ((ThreadLocal<WebDriver>) field.get(instance)).get();
-        } catch (IllegalAccessException e){     //catch (NoSuchFieldException | IllegalAccessException e)
+        } catch (NoSuchFieldException | IllegalAccessException e){     //catch (NoSuchFieldException | IllegalAccessException e)
             throw new RuntimeException(e);
         }
     }
