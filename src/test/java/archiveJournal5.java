@@ -4,6 +4,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+
+import javax.swing.plaf.basic.BasicSliderUI;
 
 
 public class archiveJournal5 extends MainTest{
@@ -81,7 +84,9 @@ public class archiveJournal5 extends MainTest{
         WebElement first_page = (WebElement)
                 jse.executeScript
                         ("return document.querySelector(\"#\\\\31 30459\").shadowRoot.querySelector(\"#toolbar\").shadowRoot.querySelector(\"#toolbar > div:nth-child(13)\")");
-        first_page.click();
+        //first_page.click();
+        Actions action = new Actions(driver);
+        action.click(first_page).perform();
         Thread.sleep(2000);
 
         //проверка кнопки автопрокрутка

@@ -164,7 +164,7 @@ public class MainTest {
         //aJournal3.filters_comment(comment_2_input);
         //"Проверка отображения сообщений в журнале после применения фильтров (русские символы) предыдущие фильтры не откл")
     }
-*/
+
     @Test
     @DisplayName("Проверка фильтров RT")
     public void test8() throws InterruptedException {
@@ -177,7 +177,7 @@ public class MainTest {
         aJournal4.timeRT();
         //aJournal4.toDateRT();
     }
-/*
+*/
     @Test
     @DisplayName("Проверка автопрокрутки")
     public void test9() throws InterruptedException {
@@ -185,8 +185,8 @@ public class MainTest {
 
         aJournal5.StartTest();
         aJournal5.test5page();
-        aJournal5.alarmsActivation();
+        //aJournal5.alarmsActivation();
         aJournal5.auto();
     }
-*/
+
 }
