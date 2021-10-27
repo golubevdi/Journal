@@ -375,18 +375,10 @@ public class archiveJournal4 extends MainTest{
         int hh_m = Integer.parseInt(HH_message_hh);
 
         while (hh_f != hh_m){
-            if (hh_f < hh_m){
-                WebElement HH_up = (WebElement)
-                        jse.executeScript
-                                ("return document.querySelector(\"#calend > div > div:nth-child(2) > div:nth-child(1) > #up\")");
-                HH_up.click();
-            }/*
-            else if (hh_f > hh_m){
-                WebElement HH_down = (WebElement)
-                        jse.executeScript
-                                ("return document.querySelector(\"#calend > div > div:nth-child(2) > div:nth-child(1) > #down\")");
-                HH_down.click();
-            }*/
+            WebElement HH_up = (WebElement)
+                    jse.executeScript
+                            ("return document.querySelector(\"#calend > div > div:nth-child(2) > div:nth-child(1) > #up\")");
+            HH_up.click();
             HH_filter = (String)
                     jse.executeScript
                             ("return document.querySelector(\"#HH\").value");
