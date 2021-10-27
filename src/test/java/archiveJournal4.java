@@ -33,6 +33,7 @@ public class archiveJournal4 extends MainTest{
         //Ожидание (загрузка страницы, элементов)
         Thread.sleep(2000);
     }
+
     @Step("Активация Тревог с нужным приоритетом")
     public void alarms() throws InterruptedException {
         System.out.println("шаг 3 активация Тревог с нужным приоритетом");
@@ -243,5 +244,159 @@ public class archiveJournal4 extends MainTest{
                         ("return document.querySelector(\"#\\\\31 28860\").shadowRoot.querySelector(\"#toolbar\").shadowRoot.querySelector(\"#toolbar > div.hmi-j--all.btn\")");
         acked_all.click();
         Thread.sleep(3000);
+    }
+
+    @Step("Проверка фильтра RT по приоритету (туллбар)")
+    public void severityRT() throws InterruptedException {
+        System.out.println("шаг 4 проверка фильтра RT по приоритету");
+        System.out.println("-------------------------------------------------------");
+
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
+
+        //Сброс
+        WebElement resetRT_button = (WebElement)
+                jse.executeScript
+                        ("return document.querySelector(\"#\\\\31 28860\").shadowRoot.querySelector(\"#toolbar\").shadowRoot.querySelector(\"#toolbar > div.hmi-j-reset_settings.btn\")");
+        resetRT_button.click();
+
+        //кол-во сообщений в журнале до применения фильтра
+        Long events_count_before = (Long)
+                jse.executeScript
+                        ("return document.querySelector(\"#\\\\31 28860\").shadowRoot.querySelector(\"div > div:nth-child(2) > table > tbody\").childElementCount");
+        System.out.println("Кол-во сообщений до: " + events_count_before);
+
+        //Поиск кнопки Приоритет и клик по ней
+        WebElement severityRT_button = (WebElement)
+                jse.executeScript
+                        ("return document.querySelector(\"#\\\\31 28860\").shadowRoot.querySelector(\"#toolbar\").shadowRoot.querySelector(\"#toolbar > div.btn.hmi-j-info\")");
+        severityRT_button.click();
+        Thread.sleep(1000);
+
+        //Увеличение начального приоритета на 1
+        WebElement inc_up1 = (WebElement)
+                jse.executeScript
+                        ("return document.querySelector(\"#\\\\31 28860\").shadowRoot.querySelector(\"#inp1\").shadowRoot.querySelector(\"#incr\")");
+        inc_up1.click();
+
+        //Увеличение конечного приоритета на 2
+        WebElement inc_up2 = (WebElement)
+                jse.executeScript
+                        ("return document.querySelector(\"#\\\\31 28860\").shadowRoot.querySelector(\"#inp2\").shadowRoot.querySelector(\"#incr\")");
+        inc_up2.click();
+        Thread.sleep(500);
+        inc_up2.click();
+
+        //Применение фильтра
+        WebElement severityRT_button_ok = (WebElement)
+                jse.executeScript
+                        ("return document.querySelector(\"#\\\\31 28860\").shadowRoot.querySelector(\"#btnOk\")");
+        severityRT_button_ok.click();
+
+        Thread.sleep(1000);
+
+        //кол-во сообщений в журнале
+        Long events_count = (Long)
+                jse.executeScript
+                        ("return document.querySelector(\"#\\\\31 28860\").shadowRoot.querySelector(\"div > div:nth-child(2) > table > tbody\").childElementCount");
+        System.out.println("Кол-во сообщений после: " + events_count);
+
+        //Проверка, что кол-фо сообщений до применения и после применение фильтра разное
+        Assertions.assertNotEquals(events_count_before, events_count);
+
+        //Проверка фильтров Приоритет по всем сообщениям после применения фильтра
+        while(events_count != 0){
+            String num = events_count.toString();
+            String doc = "return document.querySelector(\"#\\\\31 28860\").shadowRoot.querySelector(\"tr:nth-child("
+                    + num + ") > td:nth-child(5)\")";
+            WebElement message = (WebElement)
+                    jse.executeScript
+                            (doc);
+            System.out.println("Сообщение №" + num + " = "+ message.getText());
+
+            //Сравнение приоритета сообщения с 1
+            Assertions.assertNotEquals(message.getText(),"3");
+
+            events_count--;
+        }
+
+        Thread.sleep(3000);
+    }
+
+    @Step("Проверка фильтра RT по времени (туллбар)")
+    public void timeRT() throws InterruptedException {
+        System.out.println("шаг 5 проверка фильтра RT по времени");
+        System.out.println("-------------------------------------------------------");
+
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
+
+        //Сброс
+        WebElement resetRT_button = (WebElement)
+                jse.executeScript
+                        ("return document.querySelector(\"#\\\\31 28860\").shadowRoot.querySelector(\"#toolbar\").shadowRoot.querySelector(\"#toolbar > div.hmi-j-reset_settings.btn\")");
+        resetRT_button.click();
+
+        //Кол-во сообщений в журнале до применения фильтра
+        Long events_count = (Long)
+                jse.executeScript
+                        ("return document.querySelector(\"#\\\\31 28860\").shadowRoot.querySelector(\"div > div:nth-child(2) > table > tbody\").childElementCount");
+        System.out.println("Кол-во сообщений до: " + events_count);
+
+        //Время у самого раннего сообщения
+        String num = events_count.toString();
+        String doc = "return document.querySelector(\"#\\\\31 28860\").shadowRoot.querySelector(\"tr:nth-child("
+                + num + ") > td:nth-child(6)\")";
+        WebElement message = (WebElement)
+                jse.executeScript
+                        (doc);
+        System.out.println("время: " + message.getText());
+
+        //Включение фильтра
+        WebElement timeRT_button = (WebElement)
+                jse.executeScript
+                        ("return document.querySelector(\"#\\\\31 28860\").shadowRoot.querySelector(\"#toolbar\").shadowRoot.querySelector(\"#toolbar > div.btn.hmi-j-inerval_go\")");
+        timeRT_button.click();
+
+        //Задание начального времени
+        WebElement timeRT_button_calendar = (WebElement)
+                jse.executeScript
+                        ("return document.querySelector(\"#\\\\31 28860\").shadowRoot.querySelector(\"#left\").shadowRoot.querySelector(\"#btnCal\")");
+        timeRT_button_calendar.click();
+
+        String HH = (String)
+                jse.executeScript
+                        ("return document.querySelector(\"#HH\").value");
+        System.out.println("часы: " + HH);
+
+
+        /*
+        String s1 = message.getText();
+        WebElement begin_time = (WebElement)
+                jse.executeScript
+                        ("return document.querySelector(\"#\\\\31 28860\").shadowRoot.querySelector(\"#left\").shadowRoot.querySelector(\"input\")");
+        Thread.sleep(1000);
+        */
+        //begin_time.sendKeys("\b");
+        //begin_time.sendKeys(Keys.ARROW_LEFT);
+        //begin_time.sendKeys(s1);
+
+
+
+        Thread.sleep(10000);
+
+    }
+    @Step("Проверка перехода к дате")
+    public void toDateRT() throws InterruptedException {
+        System.out.println("шаг 6 проверка перехода к дате (туллбар)");
+        System.out.println("-------------------------------------------------------");
+
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
+
+        //Сброс
+        WebElement resetRT_button = (WebElement)
+                jse.executeScript
+                        ("return document.querySelector(\"#\\\\31 28860\").shadowRoot.querySelector(\"#toolbar\").shadowRoot.querySelector(\"#toolbar > div.hmi-j-reset_settings.btn\")");
+        resetRT_button.click();
+        Thread.sleep(1000);
+
     }
 }

@@ -54,7 +54,7 @@ public class MainTest {
         driver.set(new ChromeDriver());
         //Полноэкранный режим driver.manage().window().maximize();
     }
-
+/*
     @Test
     @DisplayName("Проверка отображения пользовательского параметра тревоги в журнале (русские символы)")
     public void test1() throws InterruptedException {
@@ -164,6 +164,7 @@ public class MainTest {
         //aJournal3.filters_comment(comment_2_input);
         //"Проверка отображения сообщений в журнале после применения фильтров (русские символы) предыдущие фильтры не откл")
     }
+ */
     @Test
     @DisplayName("Проверка фильтров RT")
     public void test8() throws InterruptedException {
@@ -171,10 +172,12 @@ public class MainTest {
 
         aJournal4.StartTest();
         aJournal4.test4page();
-        aJournal4.alarms();
+        //aJournal4.alarms();
+        //aJournal4.severityRT();
+        aJournal4.timeRT();
+        //aJournal4.toDateRT();
     }
-
-
+/*
     @Test
     @DisplayName("Проверка автопрокрутки")
     public void test9() throws InterruptedException {
@@ -185,4 +188,5 @@ public class MainTest {
         aJournal5.alarmsActivation();
         aJournal5.autoprokrutka();
     }
+ */
 }
