@@ -29,10 +29,10 @@ public class MainTest {
     final String comment_1_input = "комментарий";
     final String message_2_input = "message";
     final String comment_2_input = "comment";
-    final String full_name_object_1 = "Объекты.Test 3.Объект 1";
+    final String full_name_object_1 = "Объекты.Page 3.Объект 1";
     final String name_object_1 = "Объект 1";
     final String source_1 = "Тревога 1";
-    final String full_name_object_2 = "Объекты.Test 3.Object 2";
+    final String full_name_object_2 = "Объекты.Page 3.Object 2";
     final String name_object_2 = "Object 2";
     final String source_2 = "Alarm 2";
 
@@ -54,7 +54,7 @@ public class MainTest {
         driver.set(new ChromeDriver());
         //Полноэкранный режим driver.manage().window().maximize();
     }
-/*
+
     @Test
     @DisplayName("Проверка отображения пользовательского параметра тревоги в журнале (русские символы)")
     public void test1() throws InterruptedException {
@@ -68,6 +68,7 @@ public class MainTest {
         aJournal1.fileCSV(parameter_1_input, comment_input);
         aJournal1.deleteFile();
     }
+/*
     @Test
     @DisplayName("Проверка отображения пользовательского параметра тревоги в журнале (английские символы)")
     public void test2() throws InterruptedException {
@@ -81,7 +82,7 @@ public class MainTest {
         aJournal1.fileCSV(parameter_1_input_1, comment_input_1);
         aJournal1.deleteFile();
     }
-
+*/
     @Test
     @DisplayName("Issue 21417: Свойство Состояние+Приоритет для журнала")
     public void test3() throws InterruptedException {
@@ -108,7 +109,7 @@ public class MainTest {
         aJournal3.on(message_1_input, comment_1_input, full_name_object_1, name_object_1, source_1);
         aJournal3.off(message_1_input, comment_1_input, full_name_object_1, name_object_1, source_1);
     }
-
+/*
     @Test
     @DisplayName("Проверка отображения сообщений в журнале (английские символы)")
     public void test5() throws InterruptedException {
@@ -123,7 +124,7 @@ public class MainTest {
         aJournal3.on(message_2_input,comment_2_input,full_name_object_2,name_object_2,source_2);
         aJournal3.off(message_2_input,comment_2_input,full_name_object_2,name_object_2,source_2);
     }
-
+*/
     @Test
     @DisplayName("Проверка отображения сообщений в журнале после применения фильтров (русские символы) всегда один фильтр")
     public void test6() throws InterruptedException {
@@ -143,7 +144,7 @@ public class MainTest {
 
         //aJournal3.filters_comment(comment_1_input);
     }
-
+/*
     @Test
     @DisplayName("Проверка отображения сообщений в журнале после применения фильтров (английские символы) всегда один фильтр")
     public void test7() throws InterruptedException {

@@ -85,9 +85,11 @@ public class archiveJournal5 extends MainTest{
                 jse.executeScript
                         ("return document.querySelector(\"#\\\\31 30459\").shadowRoot.querySelector(\"#toolbar\").shadowRoot.querySelector(\"#toolbar > div:nth-child(13)\")");
         //first_page.click();
+
         Actions action = new Actions(driver);
         action.click(first_page).perform();
         Thread.sleep(2000);
+
 
         //проверка кнопки автопрокрутка
         auto_btn = (String)
