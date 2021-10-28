@@ -136,9 +136,9 @@ public class MainTest {
         aJournal3.alarm2(message_2_input,comment_2_input);
         aJournal3.filters_severity(severity_1);
         aJournal3.filters_message(message_1_input);
-        aJournal3.filters_object(name_object_1);
-        aJournal3.filters_full_name_object(full_name_object_1);
-        aJournal3.filters_source(source_1);
+        //aJournal3.filters_object(name_object_1);
+        //aJournal3.filters_full_name_object(full_name_object_1);
+        //aJournal3.filters_source(source_1);
 
         //Bug 21528: Удаление комментария в архивном сообщении при квитировании с отключенным свойством запрашивать комментарий
 
@@ -186,7 +186,7 @@ public class MainTest {
 
         aJournal5.StartTest();
         aJournal5.test5page();
-        //aJournal5.alarmsActivation();
+        aJournal5.alarmsActivation();
         aJournal5.auto();
     }
 

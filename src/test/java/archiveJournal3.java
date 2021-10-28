@@ -195,7 +195,7 @@ public class archiveJournal3 extends MainTest{
 
         //есть ошибка
         Assertions.assertEquals(message_1_input, messageAckText1);
-        //Assertions.assertEquals(comment_1_input, commentAckText1);
+        Assertions.assertEquals(comment_1_input, commentAckText1);
 
         Assertions.assertEquals(full_name_object,fullNameObjectAckText1);
         Assertions.assertEquals(name_object,nameObjectAckText1);
