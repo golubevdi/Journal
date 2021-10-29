@@ -37,6 +37,7 @@ public class archiveJournal5 extends MainTest{
         //Ожидание (загрузка страницы, элементов)
         Thread.sleep(2000);
     }
+
     @Step("Генерация сообщений")
     public void alarmsActivation() throws InterruptedException{
         //Поиск кнопки активации тревог и клик по ней
@@ -45,6 +46,7 @@ public class archiveJournal5 extends MainTest{
         //Ожидание (появления сообщений в журнале)
         Thread.sleep(2000);
     }
+
     @Step("Автопрокрутка")
     public void auto() throws InterruptedException{
         System.out.println("шаг 3 включения автопрокрутки в верхнем положении скроллбара");

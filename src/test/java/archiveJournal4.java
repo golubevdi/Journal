@@ -349,7 +349,7 @@ public class archiveJournal4 extends MainTest{
                 jse.executeScript
                         (doc);
         System.out.println("время: " + message.getText());
-        String HH_message = message.getText();
+        String HHmmSS_message = message.getText();
 
         //Включение фильтра
         WebElement timeRT_button = (WebElement)
@@ -363,12 +363,70 @@ public class archiveJournal4 extends MainTest{
                         ("return document.querySelector(\"#\\\\31 28860\").shadowRoot.querySelector(\"#left\").shadowRoot.querySelector(\"#btnCal\")");
         timeRT_button_calendar.click();
 
+        //Задание DD
+        String DD_filter = (String)
+                jse.executeScript
+                        ("return document.querySelector(\"#dd\").value");
+        String DD_message_dd = HHmmSS_message.substring(0, 2);
+        System.out.println("день: " + DD_message_dd);
+
+        //Задание MM
+        String MM_filter = (String)
+                jse.executeScript
+                        ("return document.querySelector(\"#MM\").value");
+        String MM_message_mm = HHmmSS_message.substring(3, 5);
+        System.out.println("месяц: " + MM_message_mm);
+
+        //Задание YY
+        String YY_filter = (String)
+                jse.executeScript
+                        ("return document.querySelector(\"#YYYY\").value");
+        String YY_message_yy = HHmmSS_message.substring(6, 10);
+        System.out.println("год: " + YY_message_yy);
+
+
+        //Задание HH
         String HH_filter = (String)
                 jse.executeScript
                         ("return document.querySelector(\"#HH\").value");
-        System.out.println("часы: " + HH_filter);
-        System.out.println("часы: " + HH_message.substring(11, 13));
-        String HH_message_hh = HH_message.substring(11, 13);
+        String HH_message_hh = HHmmSS_message.substring(11, 13);
+        System.out.println("часы: " + HH_message_hh);
+
+        //Задание MM
+        String mm_filter = (String)
+                jse.executeScript
+                        ("return document.querySelector(\"#calend > div > div:nth-child(2) > div:nth-child(2) > #mm\").value");
+
+        String mm_message_mm = HHmmSS_message.substring(14, 16);
+        System.out.println("минуты: " + mm_message_mm);
+
+        //Задание ss
+        String ss_filter = (String)
+                jse.executeScript
+                        ("return document.querySelector(\"#ss\").value");
+
+        String SS_message_ss = HHmmSS_message.substring(17, 19);
+        System.out.println("секунды: " + SS_message_ss);
+
+        //Установка дня (DD) в фильтре
+        int dd_f = Integer.parseInt(DD_filter);
+        System.out.println("vb" + dd_f);
+        int dd_m = Integer.parseInt(DD_message_dd);
+        System.out.println("vb" + dd_m);
+
+        while (dd_f != dd_m){
+            WebElement DD_up = (WebElement)
+                    jse.executeScript
+                            ("return document.querySelector(\"#calend > div > div:nth-child(1) > div:nth-child(1) > #up\")");
+            DD_up.click();
+            DD_filter = (String)
+                    jse.executeScript
+                            ("return document.querySelector(\"#dd\").value");
+            dd_f = Integer.parseInt(DD_filter);
+        }
+        //Установка месяца (mm) в фильтре
+
+        //Установка года (YYYY) в фильтре
 
         //Установка часов (HH) в фильтре
         int hh_f = Integer.parseInt(HH_filter);
@@ -383,6 +441,36 @@ public class archiveJournal4 extends MainTest{
                     jse.executeScript
                             ("return document.querySelector(\"#HH\").value");
             hh_f = Integer.parseInt(HH_filter);
+        }
+
+        //Установка минут (mm) в фильтре
+        int mm_f = Integer.parseInt(mm_filter);
+        int mm_m = Integer.parseInt(MM_message_mm);
+
+        while (mm_f != mm_m){
+            WebElement mm_up = (WebElement)
+                    jse.executeScript
+                            ("return document.querySelector(\"#calend > div > div:nth-child(2) > div:nth-child(2) > #up\")");
+            mm_up.click();
+            mm_filter = (String)
+                    jse.executeScript
+                            ("return document.querySelector(\"#calend > div > div:nth-child(2) > div:nth-child(2) > #mm\").value");
+            mm_f = Integer.parseInt(mm_filter);
+        }
+
+        //Установка секунд (ss) в фильтре
+        int ss_f = Integer.parseInt(ss_filter);
+        int ss_m = Integer.parseInt(SS_message_ss);
+
+        while (ss_f != ss_m){
+            WebElement ss_up = (WebElement)
+                    jse.executeScript
+                            ("return document.querySelector(\"#calend > div > div:nth-child(2) > div:nth-child(3) > #up\")");
+            ss_up.click();
+            ss_filter = (String)
+                    jse.executeScript
+                            ("return document.querySelector(\"#ss\").value");
+            ss_f = Integer.parseInt(ss_filter);
         }
 
         /*
