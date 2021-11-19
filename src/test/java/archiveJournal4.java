@@ -336,13 +336,13 @@ public class archiveJournal4 extends MainTest{
         resetRT_button.click();
 
         //Кол-во сообщений в журнале до применения фильтра
-        Long events_count = (Long)
+        Long events_count_before = (Long)
                 jse.executeScript
                         ("return document.querySelector(\"#\\\\31 28860\").shadowRoot.querySelector(\"div > div:nth-child(2) > table > tbody\").childElementCount");
-        System.out.println("Кол-во сообщений до: " + events_count);
+        System.out.println("Кол-во сообщений до: " + events_count_before);
 
         //Время у самого раннего сообщения
-        String num = events_count.toString();
+        String num = events_count_before.toString();
         String doc = "return document.querySelector(\"#\\\\31 28860\").shadowRoot.querySelector(\"tr:nth-child("
                 + num + ") > td:nth-child(6)\")";
         WebElement message = (WebElement)
@@ -356,6 +356,32 @@ public class archiveJournal4 extends MainTest{
                 jse.executeScript
                         ("return document.querySelector(\"#\\\\31 28860\").shadowRoot.querySelector(\"#toolbar\").shadowRoot.querySelector(\"#toolbar > div.btn.hmi-j-inerval_go\")");
         timeRT_button.click();
+
+        //Открытие календаря для задания интервала
+        WebElement calendar_interval = (WebElement)
+                jse.executeScript
+                        ("return document.querySelector(\"#\\\\31 28860\").shadowRoot.querySelector(\"#inter\").shadowRoot.querySelector(\"#btnCal\")");
+        calendar_interval.click();
+
+        //Выставляем 00 часов
+        WebElement calendar_hh = (WebElement)
+                jse.executeScript
+                        ("return document.querySelector(\"#calend > div:nth-child(2) > div:nth-child(1) > #down\")");
+        calendar_hh.click();
+
+        //Выставляем 01 сек
+        WebElement calendar_mm = (WebElement)
+                jse.executeScript
+                        ("return document.querySelector(\"#calend > div:nth-child(2) > div:nth-child(3) > #up\")");
+        calendar_mm.click();
+
+        //Кнопка подтверждения
+        WebElement calendar_ok = (WebElement)
+                jse.executeScript
+                        ("return document.querySelector(\"#save\")");
+        calendar_ok.click();
+
+        Thread.sleep(1000);
 
         //Задание начального времени
         WebElement timeRT_button_calendar = (WebElement)
@@ -371,11 +397,11 @@ public class archiveJournal4 extends MainTest{
         System.out.println("день: " + DD_message_dd);
 
         //Задание MM
-        String MM_filter = (String)
+        String MMM_filter = (String)
                 jse.executeScript
                         ("return document.querySelector(\"#MM\").value");
-        String MM_message_mm = HHmmSS_message.substring(3, 5);
-        System.out.println("месяц: " + MM_message_mm);
+        String MMM_message_mmm = HHmmSS_message.substring(3, 5);
+        System.out.println("месяц: " + MMM_message_mmm);
 
         //Задание YY
         String YY_filter = (String)
@@ -410,9 +436,7 @@ public class archiveJournal4 extends MainTest{
 
         //Установка дня (DD) в фильтре
         int dd_f = Integer.parseInt(DD_filter);
-        System.out.println("vb" + dd_f);
         int dd_m = Integer.parseInt(DD_message_dd);
-        System.out.println("vb" + dd_m);
 
         while (dd_f != dd_m){
             WebElement DD_up = (WebElement)
@@ -424,9 +448,37 @@ public class archiveJournal4 extends MainTest{
                             ("return document.querySelector(\"#dd\").value");
             dd_f = Integer.parseInt(DD_filter);
         }
+
         //Установка месяца (mm) в фильтре
+        int MMM_f = Integer.parseInt(MMM_filter);
+        int MMM_m = Integer.parseInt(MMM_message_mmm);
+
+        while (MMM_f != MMM_m){
+            WebElement MMM_up = (WebElement)
+                    jse.executeScript
+                            ("return document.querySelector(\"#calend > div > div:nth-child(1) > div:nth-child(2) > #up\")");
+            MMM_up.click();
+            MMM_filter = (String)
+                    jse.executeScript
+                            ("return document.querySelector(\"#MM\").value");
+            MMM_f = Integer.parseInt(MMM_filter);
+        }
 
         //Установка года (YYYY) в фильтре
+
+        int YY_f = Integer.parseInt(YY_filter);
+        int YY_m = Integer.parseInt(YY_message_yy);
+
+        while (YY_f != YY_m){
+            WebElement YY_up = (WebElement)
+                    jse.executeScript
+                            ("return document.querySelector(\"#calend > div > div:nth-child(1) > div:nth-child(3) > #up\")");
+            YY_up.click();
+            YY_filter = (String)
+                    jse.executeScript
+                            ("return document.querySelector(\"#YYYY\").value");
+            YY_f = Integer.parseInt(YY_filter);
+        }
 
         //Установка часов (HH) в фильтре
         int hh_f = Integer.parseInt(HH_filter);
@@ -445,7 +497,7 @@ public class archiveJournal4 extends MainTest{
 
         //Установка минут (mm) в фильтре
         int mm_f = Integer.parseInt(mm_filter);
-        int mm_m = Integer.parseInt(MM_message_mm);
+        int mm_m = Integer.parseInt(mm_message_mm);
 
         while (mm_f != mm_m){
             WebElement mm_up = (WebElement)
@@ -473,20 +525,28 @@ public class archiveJournal4 extends MainTest{
             ss_f = Integer.parseInt(ss_filter);
         }
 
-        /*
-        String s1 = message.getText();
-        WebElement begin_time = (WebElement)
-                jse.executeScript
-                        ("return document.querySelector(\"#\\\\31 28860\").shadowRoot.querySelector(\"#left\").shadowRoot.querySelector(\"input\")");
         Thread.sleep(1000);
-        */
-        //begin_time.sendKeys("\b");
-        //begin_time.sendKeys(Keys.ARROW_LEFT);
-        //begin_time.sendKeys(s1);
 
-        Thread.sleep(10000);
+        //Найти и кликнуть по кнопке подтверждения
+        WebElement button_save = (WebElement)
+                jse.executeScript
+                        ("return document.querySelector(\"#save\")");
+        button_save.click();
+
+        Thread.sleep(1000);
+
+        //Кол-во сообщений в журнале после применения фильтра
+        Long events_count_after = (Long)
+                jse.executeScript
+                        ("return document.querySelector(\"#\\\\31 28860\").shadowRoot.querySelector(\"div > div:nth-child(2) > table > tbody\").childElementCount");
+        System.out.println("Кол-во сообщений после: " + events_count_after);
+
+        Assertions.assertTrue( events_count_before > events_count_after);
+
+        Thread.sleep(2000);
 
     }
+
     @Step("Проверка перехода к дате")
     public void toDateRT() throws InterruptedException {
         System.out.println("шаг 6 проверка перехода к дате (туллбар)");
@@ -501,5 +561,12 @@ public class archiveJournal4 extends MainTest{
         resetRT_button.click();
         Thread.sleep(1000);
 
+        //Активация фильтра перехода к дате
+        WebElement to_date_filter_button = (WebElement)
+                jse.executeScript
+                        ("return document.querySelector(\"#\\\\31 28860\").shadowRoot.querySelector(\"#toolbar\").shadowRoot.querySelector(\"#toolbar > div.hmi-j-select-data.btn\")");
+        to_date_filter_button.click();
+
+        Thread.sleep(1000);
     }
 }

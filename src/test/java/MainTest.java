@@ -47,7 +47,7 @@ public class MainTest {
         ChromeOptions options = new ChromeOptions();
         options.setHeadless(true);
         //Скачивание нужного драйвера
-        //вот так вот WebDriverManager.chromedriver().setup();
+        ///WebDriverManager.chromedriver().setup();
         //System.setProperty("webdriver.chrome.driver", "C:\\chromedriver\\chromedriver.exe");
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\Public\\Autotests\\chromedriver_win32\\chromedriver.exe");
         //Создаем новый объект chromedriver
@@ -167,21 +167,42 @@ public class MainTest {
     }
 */
     @Test
-    @DisplayName("Проверка фильтров RT")
+    @DisplayName("Проверка фильтров RT: приоритет")
     public void test8() throws InterruptedException {
         archiveJournal4 aJournal4 = new archiveJournal4(driver.get());
 
         aJournal4.StartTest();
         aJournal4.test4page();
         //aJournal4.alarms();
-        //aJournal4.severityRT();
-        aJournal4.timeRT();
-        //aJournal4.toDateRT();
+        aJournal4.severityRT();
+
+    }
+
+    @Test
+    @DisplayName("Проверка фильтров RT: по времени")
+    public void test9() throws InterruptedException {
+        archiveJournal4 aJournal5 = new archiveJournal4(driver.get());
+
+        aJournal5.StartTest();
+        aJournal5.test4page();
+        //aJournal4.alarms();
+        aJournal5.timeRT();
+    }
+
+    @Test
+    @DisplayName("Проверка фильтров RT: переход к дате")
+    public void test10() throws InterruptedException {
+        archiveJournal4 aJournal6 = new archiveJournal4(driver.get());
+
+        aJournal6.StartTest();
+        aJournal6.test4page();
+        //aJournal4.alarms();
+        aJournal6.toDateRT();
     }
 /*
     @Test
     @DisplayName("Проверка автопрокрутки")
-    public void test9() throws InterruptedException {
+    public void test11() throws InterruptedException {
         archiveJournal5 aJournal5 = new archiveJournal5(driver.get());
 
         aJournal5.StartTest();
